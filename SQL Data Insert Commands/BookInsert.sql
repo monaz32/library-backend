@@ -1,0 +1,7 @@
+LOAD DATA LOCAL INFILE 'C:/Users/Nancy Wu/library-backend/Data/BookData.csv' 
+INTO TABLE Book 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+

@@ -1,0 +1,83 @@
+isbn,title,author,publisher
+1000,"Story of Philosophy, The","Durant, Will",Pocket
+1001,Tales of Mystery and Imagination,"Poe, Edgar Allen",HarperCollins
+1002,Jurassic Park,"Crichton, Michael",Random House
+1003,"Brethren, The","Grisham, John",Random House
+1004,"Wealth of Nations, The","Smith, Adam",Random House
+1005,"Raisin in the Sun, A","Hansberry, Lorraine",Penguin
+1006,"Complete Sherlock Holmes, The - Vol I","Doyle, Arthur Conan",Random House
+1007,"Complete Sherlock Holmes, The - Vol II","Doyle, Arthur Conan",Random House
+1008,"Pillars of the Earth, The","Follett, Ken",Random House
+1009,"Prisoner of Birth, A","Archer, Jeffery",Pan
+1010,"Veteran, The","Forsyth, Frederick",Transworld
+1011,False Impressions,"Archer, Jeffery",Pan
+1012,All the President's Men,"Woodward, Bob",Random House
+1013,Catch 22,"Heller, Joseph",Random House
+1014,"Complete Mastermind, The",BBC,BBC
+1015,Angels & Demons,"Brown, Dan",Random House
+1016,Superfreakonomics,"Dubner, Stephen",HarperCollins
+1017,"Tao of Physics, The","Capra, Fritjof",Penguin
+1018,"Farewell to Arms, A","Hemingway, Ernest",Rupa
+1019,"Amulet of Samarkand, The","Stroud, Jonathan",Random House
+1020,"New Machiavelli, The","Wells, H. G.",Penguin
+1021,Crime and Punishment,"Dostoevsky, Fyodor",Penguin
+1022,"Russian Journal, A","Steinbeck, John",Penguin
+1023,Journal of a Novel,"Steinbeck, John",Penguin
+1024,Once There Was a War,"Steinbeck, John",Penguin
+1025,"Moon is Down, The","Steinbeck, John",Penguin
+1026,In a Free State,"Naipaul, V. S.",Rupa
+1027,God Created the Integers,"Hawking, Stephen",Penguin
+1028,Orientalism,"Said, Edward",Penguin
+1029,"Drunkard's Walk, The","Mlodinow, Leonard",Penguin
+1030,Physics & Philosophy,"Heisenberg, Werner",Penguin
+1031,"Last Lecture, The","Pausch, Randy",Hyperion
+1032,Freakonomics,"Dubner, Stephen",Penguin
+1033,"Hidden Connections, The","Capra, Fritjof",HarperCollins
+1034,Dylan on Dylan,"Dylan, Bob",Random House
+1035,Sea of Poppies,"Ghosh, Amitav",Penguin
+1036,Slaughterhouse Five,"Vonnegut, Kurt",Random House
+1037,"Trial, The","Kafka, Frank",Random House
+1038,"Beautiful and the Damned, The","Deb, Siddhartha",Penguin
+1039,"Outsider, The","Camus, Albert",Penguin
+1040,Surely You're Joking Mr Feynman,"Feynman, Richard",Random House
+1041,India from Midnight to Milennium,"Tharoor, Shashi",Penguin
+1042,"Last Mughal, The","Dalrymple, William",Penguin
+1043,Return of the Primitive,"Rand, Ayn",Penguin
+1044,Asami Asami,"Deshpande, P L",Mauj
+1045,"Argumentative Indian, The","Sen, Amartya",Picador
+1046,Mein Kampf,"Hitler, Adolf",Rupa
+1047,"Idea of Justice, The","Sen, Amartya",Penguin
+1048,Gun Gayin Awadi,"Deshpande, P L",Mauj
+1049,Aghal Paghal,"Deshpande, P L",Mauj
+1050,Let Us C,"Kanetkar, Yashwant",Prentice Hall
+1051,Ahe Manohar Tari,"Deshpande, Sunita",Mauj
+1052,Radiowaril Bhashane & Shrutika,"Deshpande, P L",Mauj
+1053,Manasa,"Kale, V P",Mauj
+1054,Scoop!,"Nayar, Kuldip",HarperCollins
+1055,Integration of the Indian States,"Menon, V P",Orient Blackswan
+1056,Maqta-e-Ghalib,"Garg, Sanjay",Mauj
+1057,Fundamentals of Wavelets,"Goswami, Jaideva",Wiley
+1058,"Nature of Statistical Learning Theory, The","Vapnik, Vladimir",Springer
+1059,Data Scientists at Work,Sebastian Gutierrez,Apress
+1060,Making Software,"Oram, Andy",O'Reilly
+1061,Learning OpenCV,"Bradsky, Gary",O'Reilly
+1062,Machine Learning for Hackers,"Conway, Drew",O'Reilly
+1063,"Signal and the Noise, The","Silver, Nate",Penguin
+1064,Python for Data Analysis,"McKinney, Wes",O'Reilly
+1065,Birth of a Theorem,"Villani, Cedric",Bodley Head
+1066,Introduction to Algorithms,"Cormen, Thomas",MIT Press
+1067,Data Smart,"Foreman, John",Wiley
+1068,Data Structures Using C & C++,"Tanenbaum, Andrew",Prentice Hall
+1069,"Social Choice & Welfare, Vol 39 No. 1",Various,Springer
+1070,Statistical Decision Theory',"Pratt, John",MIT Press
+1071,"Age of Wrath, The","Eraly, Abraham",Penguin
+1072,How to Think Like Sherlock Holmes,"Konnikova, Maria",Penguin
+1073,Structure & Interpretation of Computer Programs,"Sussman, Gerald",MIT Press
+1074,Principles of Communication Systems,"Taub, Schilling",TMH
+1075,Image Processing & Mathematical Morphology,"Shih, Frank",CRC
+1076,Data Mining Handbook,"Nisbet, Robert",Apress
+1077,Soft Computing & Intelligent Systems,"Gupta, Madan",Elsevier
+1078,Textbook of Economic Theory,"Stonier, Alfred",Pearson
+1079,Econometric Analysis,"Greene, W. H.",Pearson
+1080,"Analysis, Vol I","Tao, Terence",HBA
+1081,"Computer Vision, A Modern Approach","Forsyth, David",Pearson
