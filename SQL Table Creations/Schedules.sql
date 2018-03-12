@@ -1,5 +1,5 @@
 CREATE TABLE Schedules(
-				accountID varchar(100),
+				accountID int,
 				roomName varchar(100),
 				fromTime varchar(100),
 				toTime varchar(100),

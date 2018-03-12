@@ -1,6 +1,6 @@
 CREATE TABLE EmployeeWorkedFor 
-	(eID			varchar(100),
-	 branchNum		varchar(100),
+	(eID			int,
+	 branchNum		int,
 	 fromDate 		varchar(100),
 	 toDate			varchar(100),
 	 fromTime		varchar(100),

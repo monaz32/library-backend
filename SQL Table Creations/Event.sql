@@ -1,7 +1,7 @@
 CREATE TABLE Event (
-eventID 	varchar(8),
+eventID 	int auto_increment,
 name 		varchar(100),
-branchNum 	varchar(100) NOT NULL,
+branchNum 	int NOT NULL,
 fromTime 	varchar(100) NOT NULL,
 fromDate	varchar(100) NOT NULL,
 toTime 		varchar(100) NOT NULL,
@@ -13,3 +13,5 @@ FOREIGN KEY (branchNum) REFERENCES LibraryBranch(branchNum)
 FOREIGN KEY (fromTime, toTime, fromDate, toDate)
 REFERENCES TimePeriod (fromTime, toTime, fromDate, toDate)
 );
+
+alter table Event auto_increment = 1000;

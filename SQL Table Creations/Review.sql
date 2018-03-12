@@ -1,8 +1,8 @@
 CREATE TABLE Review(
-accountID varCHAR(100),
-isbn varCHAR(100), 
+accountID INT,
+isbn varCHAR(13), 
 rating INT,
-review varCHAR(100), 
+review varCHAR(255), 
 PRIMARY KEY (accountID, isbn), 
 FOREIGN KEY (accountID) REFERENCES Members(accountID) 
 ON UPDATE CASCADE

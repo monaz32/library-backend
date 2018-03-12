@@ -1,11 +1,11 @@
 CREATE TABLE Employee 
-	(eID			varchar(100),
+	(eID			int auto_increment,
 	 eEmail		varchar(100),
 	 SIN 			varchar(9),
 	 ename		varchar(100),
 	 eAddress		varchar(100),
 	 ePhoneNumber	varchar(100),
- 	 branchNum		varchar(100) NOT NULL,
+ 	 branchNum		int NOT NULL,
  PRIMARY KEY (eID),
  foreign KEY (branchNum) REFERENCES librarybranch(branchNum)
  ON DELETE no action
@@ -13,3 +13,5 @@ CREATE TABLE Employee
 UNIQUE (ename, ePhoneNumber),
 UNIQUE (eEmail),
 UNIQUE (SIN));
+
+alter table employee auto_increment = 100000;

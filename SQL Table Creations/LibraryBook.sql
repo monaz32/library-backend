@@ -1,6 +1,6 @@
-CREATE TABLE LibraryBook(bookID varchar(100), 
+CREATE TABLE LibraryBook(bookID int auto_increment, 
 isbn 		varchar(13) NOT NULL,
-branchNum 	varchar(100) NOT NULL,
+branchNum 	int NOT NULL,
 status		varchar(100) NOT NULL,
 genre		varchar(100),
 PRIMARY KEY (bookID), 
@@ -11,3 +11,6 @@ FOREIGN KEY (branchNum) REFERENCES LibraryBranch(branchNum)
 ON UPDATE CASCADE
 ON DELETE NO ACTION
 );
+
+
+alter table LibraryBook auto_increment = 1000;

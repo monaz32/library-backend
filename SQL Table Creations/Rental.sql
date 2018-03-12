@@ -1,8 +1,8 @@
 CREATE TABLE Rental(
-				rentalID varchar(100), 
+				rentalID int auto_increment, 
 				status varchar(100) NOT NULL,
-				bookID varchar(100) NOT NULL,
-				accountID varchar(100) NOT NULL,
+				bookID int NOT NULL,
+				accountID int NOT NULL,
 				fromTime varchar(100) NOT NULL,
 				toTime varchar(100) NOT NULL, 
 				fromDate varchar(100) NOT NULL,
@@ -19,3 +19,5 @@ ON DELETE CASCADE,
 				FOREIGN KEY (fromTime, toTime, fromDate, toDate)
 REFERENCES TimePeriod (fromTime, toTime, fromDate, toDate)
 );
+
+alter table rental auto_increment = 1000;
