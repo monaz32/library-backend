@@ -1,6 +1,6 @@
 CREATE TABLE Rental(
 				rentalID int auto_increment, 
-				status varchar(100) NOT NULL,
+				status tinyint NOT NULL,
 				bookID int NOT NULL,
 				accountID int NOT NULL,
 				fromTime varchar(100) NOT NULL,
