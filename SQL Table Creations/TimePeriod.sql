@@ -1,6 +1,6 @@
 CREATE TABLE TimePeriod 
-	(fromTime	CHAR(100),
-	 toTime	CHAR(100),
-	 fromDate 	CHAR(100),
-	 toDate		CHAR(100),
+	(fromTime	VARCHAR(100),
+	 toTime	VARCHAR(100),
+	 fromDate 	VARCHAR(100),
+	 toDate		VARCHAR(100),
  PRIMARY KEY (fromTime, toTime, fromDate, toDate));

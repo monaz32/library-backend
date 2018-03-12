@@ -1,11 +1,11 @@
 CREATE TABLE Employee 
-	(eID			CHAR(100),
-	 eEmail		CHAR(100),
-	 SIN 			CHAR(9),
-	 ename		CHAR(100),
-	 eAddress		CHAR(100),
-	 ePhoneNumber	CHAR(100),
- 	 branchNum		CHAR(100) NOT NULL,
+	(eID			varchar(100),
+	 eEmail		varchar(100),
+	 SIN 			varchar(9),
+	 ename		varchar(100),
+	 eAddress		varchar(100),
+	 ePhoneNumber	varchar(100),
+ 	 branchNum		varchar(100) NOT NULL,
  PRIMARY KEY (eID),
  foreign KEY (branchNum) REFERENCES librarybranch(branchNum)
  ON DELETE no action

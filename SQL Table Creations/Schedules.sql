@@ -1,10 +1,10 @@
 CREATE TABLE Schedules(
-				accountID CHAR(100),
-				roomName CHAR(100),
-				fromTime CHAR(100),
-				toTime CHAR(100),
-				fromDate CHAR(100),
-				toDate CHAR(100),
+				accountID varchar(100),
+				roomName varchar(100),
+				fromTime varchar(100),
+				toTime varchar(100),
+				fromDate varchar(100),
+				toDate varchar(100),
 PRIMARY KEY(accountID, roomName, fromTime, toTime, fromDate, toDate), 
 FOREIGN KEY(accountID) REFERENCES Members (accountID)
 ON UPDATE CASCADE

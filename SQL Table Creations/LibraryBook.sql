@@ -1,7 +1,7 @@
-CREATE TABLE LibraryBook(bookID CHAR(100), 
-isbn 		CHAR(13) NOT NULL,
-branchNum 	CHAR(100) NOT NULL,
-status		CHAR(100) NOT NULL,
+CREATE TABLE LibraryBook(bookID varchar(100), 
+isbn 		varchar(13) NOT NULL,
+branchNum 	varchar(100) NOT NULL,
+status		varchar(100) NOT NULL,
 PRIMARY KEY (bookID), 
 FOREIGN KEY (isbn) REFERENCES Book(isbn)
 ON UPDATE CASCADE

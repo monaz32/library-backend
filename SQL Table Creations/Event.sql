@@ -1,11 +1,11 @@
 CREATE TABLE Event (
-eventID 	CHAR(8),
-name 		CHAR(100),
-branchNum 	CHAR(100) NOT NULL,
-fromTime 	CHAR(100) NOT NULL,
-fromDate	CHAR(100) NOT NULL,
-toTime 		CHAR(100) NOT NULL,
-toDate 		CHAR(100) NOT NULL,
+eventID 	varchar(8),
+name 		varchar(100),
+branchNum 	varchar(100) NOT NULL,
+fromTime 	varchar(100) NOT NULL,
+fromDate	varchar(100) NOT NULL,
+toTime 		varchar(100) NOT NULL,
+toDate 		varchar(100) NOT NULL,
 PRIMARY KEY(eventID),
 FOREIGN KEY (branchNum) REFERENCES LibraryBranch(branchNum)
 	 ON DELETE NO ACTION
