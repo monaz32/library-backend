@@ -1,30 +1,30 @@
 var express = require('express');
 var mysql = require('mysql');
+var app = express();
 
 var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
-	password: '',
-	database: 'book'
+	password: 'yourpw',
+	database: 'library'
 });
 
-connection.connect(function() {
+connection.connect(function(error) {
 	if(!!error) {
-		console.log('Error');
-	} else {
-		console.log('Connected');
+		console.log('Error\n');
+		throw error;
 	}
-})
+	console.log('Connected\n');
 
-app.get('/', function(req, resp) {
-	connection.query("SELECT * FROM book", function(error, rows, fields){
+	connection.query('SELECT * FROM book', function(error, rows, fields){
 		if(!!error) {
-			console.log('Error in the query');
-		} else {
-			console.log('SUCCESs!\n')
-			console.log(rows);
+			console.log('Error in the query\n');
+			throw error;
 		}
-	})
-})
+		console.log('query SUCCESS!\n')
+		console.log(rows);
 
-app.listen(1337);
+		connection.end();
+	});
+});
+
