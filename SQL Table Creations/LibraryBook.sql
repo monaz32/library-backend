@@ -1,7 +1,7 @@
 CREATE TABLE LibraryBook(bookID int auto_increment, 
 isbn 		varchar(13) NOT NULL,
 branchNum 	int NOT NULL,
-status		varchar(100) NOT NULL,
+status		tinyint NOT NULL,
 genre		varchar(100),
 PRIMARY KEY (bookID), 
 FOREIGN KEY (isbn) REFERENCES Book(isbn)
