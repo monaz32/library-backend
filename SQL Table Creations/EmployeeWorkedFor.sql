@@ -1,10 +1,10 @@
 CREATE TABLE EmployeeWorkedFor 
-	(eID			CHAR(100),
-	 branchNum		CHAR(100),
-	 fromDate 		CHAR(100),
-	 toDate			CHAR(100),
-	 fromTime		CHAR(100),
-	 toTime			CHAR(100),
+	(eID			int,
+	 branchNum		int,
+	 fromDate 		varchar(100),
+	 toDate			varchar(100),
+	 fromTime		varchar(100),
+	 toTime			varchar(100),
  PRIMARY KEY (eID, branchNum, fromDate, toDate, fromTime, toTime),
  FOREIGN KEY (eID) REFERENCES Employee(eID)
  ON DELETE CASCADE
