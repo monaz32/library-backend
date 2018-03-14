@@ -7,3 +7,5 @@ CREATE TABLE Book
  PRIMARY KEY (isbn),
  UNIQUE (title, author));
 
+# This is a book
+
