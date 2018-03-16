@@ -1,5 +1,5 @@
 accountID,isbn,rating,review
-11111,1000,5,Good read
-12345,1001,5,lovely book
+11111,1000,5,"Good read"
+12345,1001,5,"lovely book"
 13579,1002,5,"very informative, helped me with my school project"
-14813,1003,5,AWESOMEEEE!!!
+14813,1003,5,"AWESOMEEEE!!!"
