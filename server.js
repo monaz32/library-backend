@@ -5,6 +5,13 @@ var app = express();
 
 app.use(bodyParser.json())
 
+var connection = mysql.createConnection({
+	host: 'localhost',
+	user: 'root',
+	password: 'Cs304funfunfun',
+	database: 'library'
+});
+
 //init routes
 require('./routes/book')(app); 
 require('./routes/employee')(app);

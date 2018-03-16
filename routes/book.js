@@ -11,7 +11,24 @@ module.exports = function(app) {
 
 //API functions
 function getBooks(request, response) {
-    response.send('Books');
+    connection.connect(function(error) {
+        if(!!error) {
+            console.log('Error\n');
+            throw error;
+        }
+        console.log('Connected\n');
+
+        connection.query('SELECT * FROM book', function(error, rows, fields){
+            if(!!error) {
+                console.log('Error in the query\n');
+                throw error;
+            }
+            console.log('query SUCCESS!\n')
+            console.log(rows);
+
+            connection.end();
+        });
+    });
 }
 
 function addBook(request, response) {
