@@ -1,6 +1,6 @@
 
 ###### 1) IF YOU ARE ON MAC YOU NEED TO CHANGE THE LINE TERMINATION FROM \r\n to \n #####
-###### To do this you need to find \r\n and replace with \r ##############
+###### To do this you need to find \r\n and replace with \n ##############
 ###### 2) YOU NEED TO CHANGE THE PATHWAY TO YOUR LOCAL DRIVE WHERE THE CSV'S ARE STORED #####
 ###### To do this you need to find *****MY_PATH and REPLACE ALL with your path ########
 ###### example path for : C:/Users/Nancy Wu/library-backend/Data #####
