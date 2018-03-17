@@ -9,6 +9,8 @@ module.exports = function(app) {
         .get(getBook);
 }
 
+var connection = require('../server').connection;
+
 //API functions
 function getBooks(request, response) {
     connection.connect(function(error) {
@@ -23,9 +25,9 @@ function getBooks(request, response) {
                 console.log('Error in the query\n');
                 throw error;
             }
-            console.log('query SUCCESS!\n')
-            console.log(rows);
 
+            console.log('query SUCCESS!\n')
+            response.send(rows);
             connection.end();
         });
     });
