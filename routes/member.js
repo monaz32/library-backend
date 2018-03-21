@@ -6,6 +6,8 @@ module.exports = function(app) {
         .put(putAPI);
 }
 
+var connection = require('../server').connection;
+
 //API functions
 function getAPI(request, response) {
 

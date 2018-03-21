@@ -1,6 +1,7 @@
 //include
 var express = require('express');
 var bodyParser = require('body-parser');
+var mysql = require('mysql');
 var app = express();
 var mysql = require('mysql');
 
@@ -12,6 +13,18 @@ var connection = mysql.createConnection({
 	password: 'CS304funfunfun',
 	database: 'library'
 });
+
+// changes
+connection.connect(function(err) {
+
+	if (err){
+		console.log('Error\n');
+	 	throw err
+	}
+});
+// changes
+
+exports.connection = connection;
 
 //init routes
 require('./routes/book')(app);
