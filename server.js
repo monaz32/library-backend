@@ -13,6 +13,16 @@ var connection = mysql.createConnection({
 	database: 'library'
 });
 
+// changes
+connection.connect(function(err) {
+
+	if (err){
+		console.log('Error\n');
+	 	throw err
+	}
+});
+// changes
+
 exports.connection = connection;
 
 //init routes
