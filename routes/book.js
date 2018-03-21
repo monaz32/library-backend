@@ -14,10 +14,10 @@ var connection = require('../server').connection;
 //API functions
 function getBooks(request, response) {
     connection.connect(function(error) {
-        if(!!error) {
-            console.log('Error\n');
-            throw error;
-        }
+    //     if(!!error) {
+    //         console.log('Error\n');
+    //         throw error;
+    //     }
         console.log('Connected\n');
 
         connection.query('SELECT * FROM book', function(error, rows, fields){
@@ -28,7 +28,7 @@ function getBooks(request, response) {
 
             console.log('query SUCCESS!\n')
             response.send(rows);
-            connection.end();
+            //connection.end();
         });
     });
 }

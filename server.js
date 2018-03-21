@@ -31,6 +31,7 @@ require('./routes/book')(app);
 require('./routes/employee')(app);
 require('./routes/event')(app);
 require('./routes/member')(app);
+require('./routes/schedules')(app);
 
 //start server
 app.listen(8080, function () {
