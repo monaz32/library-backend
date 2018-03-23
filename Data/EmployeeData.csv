@@ -1,14 +1,14 @@
-﻿eID,eEmail,SIN,ename,eAddress,ePhoneNumber,branchNum,
-590710,h.ashcroft@library.com,722129333,"ASHCROFT, HOWARD",83742 Main St,6045555432,1
-590811,b.belanger@library.com,722129545,"BELANGER, BRENDA",3912 Pitt St,6047865482,2
-590912,e.cheung@library.com,722129757,"CHEUNG, ELLIOT",666 Grizzly Way,6045820198,3
-591013,w.gregory@library.com,722129969,"GREGORY, WILLIAM",910 Boardwalk Ave,7782303231,4
-591114,b.stein@library.com,722130181,"STEIN, BERT",1010 E 10th Ave,7789005648,5
-591215,j.anderson@library.com,722130393,"ANDERSON, JAMES",2000 W 70th Ave,6045830202,1
-591316,p.fu@library.com,722130605,"FU, PAMELA",200-200 Acadia Dr,6049392794,2
-591417,f.stein@library.com,722130817,"STEIN, FRED",6-1989 Smithe St,7789230231,3
-591518,t.wozniak@library.com,722131029,"WOZNIAK, THOMAS",18 W Pender Ave,7789238503,4
-591619,j.lee@library.com,722131241,"LEE, JAMES",3000 Kingsway Blvd,7789246775,5
-591720,c.lee@library.com,722131453,"LEE, CASSANDRA",898 Hope Ave,7789255047,1
-591821,t.kim@library.com,722131665,"KIM, TIM",7100 Tunes Dr,6048292942,2
-591922,e.kai@library.com,722131877,"KAI, EDWARD",8019 Augustus St,6047820009,3
+eID,eEmail,SIN,ename,eAddress,ePhoneNumber,branchNum,adminstatus
+590710,h.ashcroft@library.com,722129333,"ASHCROFT, HOWARD",83742 Main St,6045555432,1,0
+590811,b.belanger@library.com,722129545,"BELANGER, BRENDA",3912 Pitt St,6047865482,2,0
+590912,e.cheung@library.com,722129757,"CHEUNG, ELLIOT",666 Grizzly Way,6045820198,3,0
+591013,w.gregory@library.com,722129969,"GREGORY, WILLIAM",910 Boardwalk Ave,7782303231,4,0
+591114,b.stein@library.com,722130181,"STEIN, BERT",1010 E 10th Ave,7789005648,5,0
+591215,j.anderson@library.com,722130393,"ANDERSON, JAMES",2000 W 70th Ave,6045830202,1,0
+591316,p.fu@library.com,722130605,"FU, PAMELA",200-200 Acadia Dr,6049392794,2,0
+591417,f.stein@library.com,722130817,"STEIN, FRED",6-1989 Smithe St,7789230231,3,0
+591518,t.wozniak@library.com,722131029,"WOZNIAK, THOMAS",18 W Pender Ave,7789238503,4,1
+591619,j.lee@library.com,722131241,"LEE, JAMES",3000 Kingsway Blvd,7789246775,5,1
+591720,c.lee@library.com,722131453,"LEE, CASSANDRA",898 Hope Ave,7789255047,1,1
+591821,t.kim@library.com,722131665,"KIM, TIM",7100 Tunes Dr,6048292942,2,1
+591922,e.kai@library.com,722131877,"KAI, EDWARD",8019 Augustus St,6047820009,3,1
