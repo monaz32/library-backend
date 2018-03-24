@@ -4,10 +4,15 @@ module.exports = function(app) {
     .post(addSchedule)
     .put(updateSchedules); // 405 request not allowed
 
-  app.route('/schedules/:id')
-    .get(getScheduleWithId)
-    .post(addScheduleWithId) // 405 request not allowed
-    .put(updateScheduleWithId); // 405 request not allowed
+  app.route('/schedules/:accid')
+    .get(getScheduleWithAccountID)
+    .post(addScheduleWithAccountID) // 405 request not allowed
+    .put(updateScheduleWithAccountID); // 405 request not allowed (design choice)
+
+  app.route('/schedules/:roomname')
+    .get(getScheduleWithRoomName)
+    .post(addScheduleWithRoomName) // 405 request not allowed
+    .put(updateScheduleWithRoomName); // 405 request not allowed (design choice)
 }
 
 var connection = require('../server').connection;
@@ -97,27 +102,48 @@ function addSchedule(request, response) {
 
 // Request to update all schedules: 405 bad request
 function updateSchedules(request, response) {
-  // todo
   response.status(405).send("Request not allowed.");
 }
 
 
-/////////////////// schedules/:id ///////////////////
+/////////////////// schedules/:accid ///////////////////
 // Return a single schedule
-function getScheduleWithId(request, response) {
+function getScheduleWithAccountID(request, response) {
   connection.connect(function(error) {
+    // todo
     response.status(200).send("not implemented yet");
   });
 }
 
-function addScheduleWithId(request, response) {
+// Request to add a schedule with an id: 405 bad request
+function addScheduleWithAccountID(request, response) {
   response.status(405).send("Request not allowed.");
 }
 
-function updateScheduleWithId(request, response) {
+// Request to update a schedule with an id: 405 bad request
+function updateScheduleWithAccountID(request, response) {
   response.status(405).send("Request not allowed.");
 }
 
+
+/////////////////// schedules/:roomname ///////////////////
+function getScheduleWithRoomName(request, response) {
+  connection.connect(function(error) {
+    // todo
+    response.status(200).send("not implemented yet");
+  });
+}
+
+function addScheduleWithRoomName(request, response) {
+  response.status(405).send("Request not allowed.");
+}
+
+function updateScheduleWithRoomName(request, response) {
+  response.status(405).send("Request not allowed.");
+}
+
+
+/////////////////// Utilities ///////////////////
 function logErrorToConsole(error) {
   console.log(error.code + ': ' + error.sqlMessage + '\n');
 }
