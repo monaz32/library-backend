@@ -1,0 +1,26 @@
+Selection and Projection Query
+ - Select all books by genre (use 2 different genres)
+
+Join Query
+ - show the library books and their associated authors,publishers etc
+ (join on book and librarybook)
+
+Division Query
+ - Get the library will all the books 
+ - (add a new book and show that there will be no libraries with all the books)
+
+Aggregation query
+ - Count number of books of a genre
+ - Count number of books by a author 
+
+Nested Aggregation query
+ - Max average rated book
+ - Min average rated book
+
+Delete Operation
+ - Delete a librarybook (without cascade)
+ - Delete a book (with cascade) - this deletes all their
+
+Update Operation
+ - Update fines 1. (set it to negative)
+ 2. Set it to a correct value
