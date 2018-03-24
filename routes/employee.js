@@ -3,18 +3,15 @@
 module.exports = function(app) {
     app.route('/employee')
         .get(getEmployees)
-        .post(addEmployee);
-
+        .post(addEmployee)
+        .put(updateEmployee);
 
     app.route('/employee/id/:id')
         .get(getEmployee)
-        .put(updateEmployee)
         .delete(deleteEmployee);
 
     app.route('/employee/name/:name')
         .get(getEmployeeName);
-
-
 
 }
 
@@ -32,7 +29,9 @@ function getEmployees(request, response) {
         connection.query('SELECT * FROM employee', function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
-                throw error;
+                response.status(422);
+                response.send('422 Unprocessable Entity');
+                return;
             }
 
             console.log('query SUCCESS!\n')
@@ -57,12 +56,45 @@ function addEmployee(request, response) {
     var query = 'INSERT INTO employee(eEmail,SIN,ename,eAddress,ePhoneNumber,branchNum,admin) '+ 'VALUES' +'(' + '\'' + email + '\',' + '\'' + sin + '\',' +
         '\'' + name + '\',' + '\'' + address + '\',' + '\'' + phoneNum + '\',' + '\'' + branch + '\'' + admin + ');'
 
+
+
+    connection.query(query, function(error, rows, fields){
+        if(!!error) {
+            console.log('Error in the query\n');
+            response.status(422);
+            response.send('422 Unprocessable Entity');
+            return;
+        }
+
+        console.log('query SUCCESS!\n');
+        response.send();
+        //connection.end();
+    });
+}
+
+function updateEmployee(request, response) {
+    var employ = request.body[0];
+    var eid = employ.eid;
+    var email = employ.email;
+    var sin = employ.sin;
+    var name = employ.name;
+    var address = employ.address;
+    var phoneNum = employ.phoneNum;
+    var branch = employ.branch;
+    var admin = employ.admin;
+
+    // leave this for now
+    var query = 'UPDATE employee SET eid=' + eid + "(eEmail,SIN,ename,eAddress,ePhoneNumber,branchNum,admin) "+ 'VALUES' +'(' + '\'' + email + '\',' + '\'' + sin + '\',' +
+        '\'' + name + '\',' + '\'' + address + '\',' + '\'' + phoneNum + '\',' + '\'' + branch + '\'' + admin + ');'
+
     console.log(query);
 
     connection.query(query, function(error, rows, fields){
         if(!!error) {
             console.log('Error in the query\n');
-            throw error;
+            response.status(422);
+            response.send('422 Unprocessable Entity');
+            return;
         }
 
         console.log('query SUCCESS!\n');
@@ -71,17 +103,15 @@ function addEmployee(request, response) {
     });
 }
 
-function updateEmployee(request, response) {
-    response.send(request.body.employee);
-}
-
 function getEmployee(request, response) {
 
     var eid = request.params.id;
     connection.query('SELECT * FROM employee WHERE eid=' + String(eid) +';', function(error, rows, fields){
         if(!!error) {
             console.log('Error in the query\n');
-            throw error;
+            response.status(422);
+            response.send('422 Unprocessable Entity');
+            return;
         }
 
         console.log('query SUCCESS!\n');
@@ -99,7 +129,9 @@ function getEmployeeName(request, response) {
     connection.query(query, function(error, rows, fields){
         if(!!error) {
             console.log('Error in the query\n');
-            throw error;
+            response.status(422);
+            response.send('422 Unprocessable Entity');
+            return;
         }
 
         console.log('query SUCCESS!\n');
@@ -108,6 +140,7 @@ function getEmployeeName(request, response) {
     });
 
 }
+
 
 
 function deleteEmployee(request, response) {
@@ -118,12 +151,22 @@ function deleteEmployee(request, response) {
     connection.query(query, function(error, rows, fields){
         if(!!error) {
             console.log('Error in the query\n');
-            throw error;
+            response.status(422);
+            response.send('422 Unprocessable Entity');
+            return;
         }
 
         console.log('query SUCCESS!\n');
-        response.send(rows);
+        response.send();
         //connection.end();
     });
 }
 
+function formatVariableForSQL(oriObj) {
+    if (typeof oriObj == 'string') {
+        // add single quotation marks around a string
+        return '\'' + oriObj + '\''
+    }
+    // If object is null or number, we want to keep it as is
+    return oriObj;
+}
