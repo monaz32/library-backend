@@ -6,7 +6,7 @@ module.exports = function(app) {
   app.route('/schedules/accid/:accid')
     .get(getScheduleWithAccountID);
 
-  app.route('/schedules/:roomname')
+  app.route('/schedules/room/:roomname')
     .get(getScheduleWithRoomName);
 }
 
@@ -116,8 +116,20 @@ function getScheduleWithAccountID(request, response) {
 /////////////////// schedules/:roomname ///////////////////
 function getScheduleWithRoomName(request, response) {
   connection.connect(function(error) {
-    // todo
-    response.status(200).send("not implemented yet");
+    var roomname = formatVariableForSQL(request.params.roomname);
+    var getSchedulesQuery = 'SELECT * FROM schedules where roomName = ' + roomname;
+
+    connection.query(getSchedulesQuery, function(error, row, fields) {
+      if (!!error) {
+        console.log('Error in getScheduleWithRoomName query: failed to select from schedules\n');
+        logErrorToConsole(error);
+        response.status(422).send('422 Unprocessable Entity');
+      }
+      else {
+        console.log('getScheduleWithRoomName query SUCCESSS: sending rows back to client\n');
+        response.send(row);
+      }
+    });
   });
 }
 
