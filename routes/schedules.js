@@ -1,18 +1,13 @@
 module.exports = function(app) {
   app.route('/schedules')
     .get(getSchedules)
-    .post(addSchedule)
-    .put(updateSchedules); // 405 request not allowed
+    .post(addSchedule);
 
   app.route('/schedules/:accid')
-    .get(getScheduleWithAccountID)
-    .post(addScheduleWithAccountID) // 405 request not allowed
-    .put(updateScheduleWithAccountID); // 405 request not allowed (design choice)
+    .get(getScheduleWithAccountID);
 
   app.route('/schedules/:roomname')
-    .get(getScheduleWithRoomName)
-    .post(addScheduleWithRoomName) // 405 request not allowed
-    .put(updateScheduleWithRoomName); // 405 request not allowed (design choice)
+    .get(getScheduleWithRoomName);
 }
 
 var connection = require('../server').connection;
@@ -100,11 +95,6 @@ function addSchedule(request, response) {
   });
 }
 
-// Request to update all schedules: 405 bad request
-function updateSchedules(request, response) {
-  response.status(405).send("Request not allowed.");
-}
-
 
 /////////////////// schedules/:accid ///////////////////
 // Return a single schedule
@@ -115,16 +105,6 @@ function getScheduleWithAccountID(request, response) {
   });
 }
 
-// Request to add a schedule with an id: 405 bad request
-function addScheduleWithAccountID(request, response) {
-  response.status(405).send("Request not allowed.");
-}
-
-// Request to update a schedule with an id: 405 bad request
-function updateScheduleWithAccountID(request, response) {
-  response.status(405).send("Request not allowed.");
-}
-
 
 /////////////////// schedules/:roomname ///////////////////
 function getScheduleWithRoomName(request, response) {
@@ -132,14 +112,6 @@ function getScheduleWithRoomName(request, response) {
     // todo
     response.status(200).send("not implemented yet");
   });
-}
-
-function addScheduleWithRoomName(request, response) {
-  response.status(405).send("Request not allowed.");
-}
-
-function updateScheduleWithRoomName(request, response) {
-  response.status(405).send("Request not allowed.");
 }
 
 
