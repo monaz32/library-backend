@@ -14,15 +14,13 @@ var connection = mysql.createConnection({
 	database: 'library'
 });
 
-// changes
-connection.connect(function(err) {
 
+connection.connect(function(err) {
 	if (err){
-		console.log('Error\n');
-	 	throw err
+		console.log('Error connecting to database\n');
+	 	throw err;
 	}
 });
-// changes
 
 exports.connection = connection;
 
