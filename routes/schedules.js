@@ -3,7 +3,7 @@ module.exports = function(app) {
     .get(getSchedules)
     .post(addSchedule);
 
-  app.route('/schedules/:accid')
+  app.route('/schedules/accid/:accid')
     .get(getScheduleWithAccountID);
 
   app.route('/schedules/:roomname')
@@ -95,8 +95,20 @@ function addSchedule(request, response) {
 // Return schedules booked by user with accid
 function getScheduleWithAccountID(request, response) {
   connection.connect(function(error) {
-    // todo
-    response.status(200).send("not implemented yet");
+    var accid = formatVariableForSQL(request.params.accid);
+    var getSchedulesQuery = 'SELECT * FROM schedules where accountID = ' + accid;
+
+    connection.query(getSchedulesQuery, function(error, row, fields) {
+      if (!!error) {
+        console.log('Error in getScheduleWithAccountID query: failed to select from schedules\n');
+        logErrorToConsole(error);
+        response.status(422).send('422 Unprocessable Entity');
+      }
+      else {
+        console.log('getScheduleWithAccountID query SUCCESSS: sending rows back to client\n');
+        response.send(row);
+      }
+    });
   });
 }
 
