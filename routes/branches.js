@@ -41,7 +41,18 @@ function addBranch(request, response) {
 /////////////////// branches/:bid ///////////////////
 
 function getBranchWithID(request, response) {
-  response.status(404).send("needs to be implemented");
+  var getBranchQuery = 'SELECT * FROM LibraryBranch where branchNum = ' + formatVariableForSQL(request.params.bid);
+  connection.query(getBranchQuery, function(error, rows, fields){
+    if(!!error) {
+      console.log('Error in getBranches query: failed to get all branches\n');
+      logErrorToConsole(error);
+      response.status(422).send('422 Unprocessable Entity');
+    }
+    else {
+      console.log('getBranches query SUCCESS\n')
+      response.send(rows);
+    }
+  });
 }
 
 
