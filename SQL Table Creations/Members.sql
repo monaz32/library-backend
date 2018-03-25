@@ -5,6 +5,7 @@ CREATE TABLE Members(
 	email 			varchar(100) NOT NULL,
 	name			varchar(100),
 	fines			DECIMAL,
+	password		varchar(100),
 	UNIQUE(email),
 	PRIMARY KEY(accountID)
 );
