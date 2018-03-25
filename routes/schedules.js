@@ -3,11 +3,11 @@ module.exports = function(app) {
     .get(getSchedules)
     .post(addSchedule);
 
-  app.route('/schedules/accid/:accid')
-    .get(getScheduleWithAccountID);
+  app.route('/schedules/accids/:accid')
+    .get(getSchedulesWithAccountID);
 
-  app.route('/schedules/room/:roomname')
-    .get(getScheduleWithRoomName);
+  app.route('/schedules/rooms/:roomname')
+    .get(getSchedulesWithRoomName);
 }
 
 var connection = require('../server').connection;
@@ -93,19 +93,19 @@ function addSchedule(request, response) {
 
 /////////////////// schedules/:accid ///////////////////
 // Return schedules booked by user with accid
-function getScheduleWithAccountID(request, response) {
+function getSchedulesWithAccountID(request, response) {
   connection.connect(function(error) {
     var accid = formatVariableForSQL(request.params.accid);
     var getSchedulesQuery = 'SELECT * FROM schedules where accountID = ' + accid;
 
     connection.query(getSchedulesQuery, function(error, row, fields) {
       if (!!error) {
-        console.log('Error in getScheduleWithAccountID query: failed to select from schedules\n');
+        console.log('Error in getSchedulesWithAccountID query: failed to select from schedules\n');
         logErrorToConsole(error);
         response.status(422).send('422 Unprocessable Entity');
       }
       else {
-        console.log('getScheduleWithAccountID query SUCCESSS: sending rows back to client\n');
+        console.log('getSchedulesWithAccountID query SUCCESSS: sending rows back to client\n');
         response.send(row);
       }
     });
@@ -114,19 +114,19 @@ function getScheduleWithAccountID(request, response) {
 
 
 /////////////////// schedules/:roomname ///////////////////
-function getScheduleWithRoomName(request, response) {
+function getSchedulesWithRoomName(request, response) {
   connection.connect(function(error) {
     var roomname = formatVariableForSQL(request.params.roomname);
     var getSchedulesQuery = 'SELECT * FROM schedules where roomName = ' + roomname;
 
     connection.query(getSchedulesQuery, function(error, row, fields) {
       if (!!error) {
-        console.log('Error in getScheduleWithRoomName query: failed to select from schedules\n');
+        console.log('Error in getSchedulesWithRoomName query: failed to select from schedules\n');
         logErrorToConsole(error);
         response.status(422).send('422 Unprocessable Entity');
       }
       else {
-        console.log('getScheduleWithRoomName query SUCCESSS: sending rows back to client\n');
+        console.log('getSchedulesWithRoomName query SUCCESSS: sending rows back to client\n');
         response.send(row);
       }
     });
