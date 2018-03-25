@@ -30,6 +30,9 @@ require('./routes/book')(app);
 require('./routes/employee')(app);
 require('./routes/event')(app);
 require('./routes/member')(app);
+require('./routes/rating')(app);
+require('./routes/rental')(app);
+require('./routes/review')(app);
 
 //start server
 app.listen(8080, function () {
