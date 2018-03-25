@@ -25,7 +25,8 @@ connection.connect(function(err) {
 exports.connection = connection;
 
 //init routes
-require('./routes/book')(app);
+require('./routes/book')(app); 
+require('./routes/librarybook')(app);
 require('./routes/employee')(app);
 require('./routes/event')(app);
 require('./routes/member')(app);
