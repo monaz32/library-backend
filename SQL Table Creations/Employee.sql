@@ -6,7 +6,8 @@ CREATE TABLE Employee
 	 eAddress		varchar(100),
 	 ePhoneNumber	varchar(100),
  	 branchNum		int NOT NULL,
- 	 adminstatus	tinyint, 			
+ 	 adminstatus	tinyint, 
+ 	 password		varchar(100),			
  PRIMARY KEY (eID),
  foreign KEY (branchNum) REFERENCES librarybranch(branchNum)
  ON DELETE no action
