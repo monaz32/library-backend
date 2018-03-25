@@ -1,4 +1,4 @@
-//routes
+
 //routes
 module.exports = function(app) {
     app.route('/employee')
@@ -52,7 +52,7 @@ function addEmployee(request, response) {
     var phoneNum = employ.phoneNum;
     var branch = employ.branch;
     var admin = employ.admin;
-    var password = employ.password;
+    var password = formatVariableForSQL(employ.password);
 
     var eid;
 
