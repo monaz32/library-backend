@@ -2,8 +2,10 @@
 module.exports = function(app) {  
     app.route('/rental/:id')
         .get(getRentals)
-        .post(addRental)
-        .put(returnRental);
+        .post(addRental);
+
+    app.route('/rental/return')
+        .put(returnRental)
 }
 
 var connection = require('../server').connection;
@@ -36,7 +38,7 @@ function getRentals(request, response) {
 function addRental(request, response) {
 
 	  var accountid = formatVariableForSQL(request.params.id);
-	  var bookid 	= formatVariableForSQL(request.body.bookid);
+	  var bookid 	= formatVariableForSQL(request.body.bookID);
 	  var fromTime 	= formatVariableForSQL(request.body.fromTime);
 	  var toTime 	= formatVariableForSQL(request.body.toTime);
 	  var fromDate 	= formatVariableForSQL(request.body.fromDate);
@@ -56,8 +58,7 @@ function addRental(request, response) {
 	      }
 	      else {
 	        console.log('Error in addSchedule query: failed to add to TimePeriod\n');
-	        logErrorToConsole(error);
-	        response.status(422).send('422 Unprocessable Entity');
+	        response.send('422 Unprocessable Entity');
 	        return;
 	      }
 	    }
@@ -88,7 +89,7 @@ function addRental(request, response) {
                 return;
             }
             console.log('query SUCCESS!\n')
-            response.send();
+            response.send("Rental Added!");
         });  
 }
 
@@ -98,12 +99,11 @@ function returnRental(request, response) {
 	
 	console.log(request.body);
 
-	var bookid 		= formatVariableForSQL(request.body.bookid);
-	var accountid 	= formatVariableForSQL(request.params.id);
+	var bookid 		= formatVariableForSQL(request.body.bookID);
 	var returnTime 	= formatVariableForSQL(request.body.returnTime);
 	var returnDate 	= formatVariableForSQL(request.body.returnDate);
 
-	var sqlrental = 'update rental set status = 1, returnTime =  ' + returnTime + ',returnDate = ' + returnDate + 'where bookid = ' + bookid + ' and accountID = ' + accountid;
+	var sqlrental = 'update rental set status = 1, returnTime =  ' + returnTime + ',returnDate = ' + returnDate + 'where status = 0 and bookid = ' + bookid ;
 
 	 connection.query(sqlrental, function(error, rows, fields){
             if(!!error) {
@@ -126,7 +126,7 @@ function returnRental(request, response) {
                 return;
             }
             console.log('query SUCCESS!\n')
-            response.send();
+            response.send('Rental Returned!');
         });  
 
 }

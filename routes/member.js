@@ -7,13 +7,19 @@ module.exports = function(app) {
     app.route('/member/id/:id')
     	.get(getMember)
     	.put(updateMember);
+
+    app.route('/member/login')
+        .post(memberLogin);
+
+    app.route('/member/fines')
+        .put(calcfines)
+
 }
 
 var connection = require('../server').connection;
 
 // Gets ALL Members
 function getMembers(request, response) {
-        console.log('Connected\n');
 
         connection.query('SELECT accountID,phoneNum,email,name,fines FROM members', function(error, rows, fields){
             if(!!error) {
@@ -30,7 +36,6 @@ function getMembers(request, response) {
 
 // Gets Member based on account.id given
 function getMember(request, response) {
-        console.log('Connected\n');
 
         var id = request.params.id
 
@@ -50,10 +55,6 @@ function getMember(request, response) {
 
 // Adds a new member to the database
 function addMember(request, response) {
-	
-	  console.log('Connected\n');
-
-	  console.log(request.body);
 
 	  var phoneNum 	= request.body.phoneNum;
 	  var email 	= request.body.email;
@@ -73,7 +74,7 @@ function addMember(request, response) {
             }
 
             console.log('query SUCCESS!\n');
-            response.send();
+            response.send('Member added Successfully!');
         });
         
 }
@@ -81,7 +82,6 @@ function addMember(request, response) {
 
 // Changes information based on account.id given
 function updateMember(request, response) {
-	console.log('Connected\n');
 
 	var phoneNum       = formatVariableForSQL(request.body.phoneNum);
 	var fines          = formatVariableForSQL(request.body.fines);
@@ -103,8 +103,52 @@ function updateMember(request, response) {
             }
 
             console.log('query SUCCESS!\n')
-            response.send();
+            response.send('Info Updated!');
         });
+}
+
+// Checks if a login is correct
+function memberLogin(request,response){
+
+    var email       = formatVariableForSQL(request.body.email);
+    var password    = formatVariableForSQL(request.body.password);
+
+    var query = 'SELECT EXISTS(SELECT 1 FROM members WHERE email=' + email + ' AND ' + 'password=' + password + ');'
+    connection.query(query, function(error, rows, fields){
+        if(!!error) {
+            console.log('Error in the query\n');
+            response.status(422);
+            response.send('422 Unprocessable Entity');
+            return;
+        }
+
+        var split = JSON.stringify(rows[0]).split(':',2)[1];
+        var numbers = split.match(/\d+/g).map(Number);
+        var exists = numbers[0];
+        console.log(exists);
+
+        if (exists){
+                response.send('Successful login!');            
+        } else {
+            console.log("Invalid email or password\n");
+            response.send("Invalid email or password");
+        }
+    });
+}
+
+function calcfines(request,response){
+
+    var sql = 'call calcfines();'
+
+     connection.query(sql, function(error, rows, fields){
+            if(!!error) {
+                console.log('Error in the query\n');
+                response.send('422 Unprocessable Entity');
+                return;
+            }
+            console.log('query SUCCESS!\n')
+            response.send('Fines have been updated!');
+        });  
 }
 
 function formatVariableForSQL(oriObj) {
