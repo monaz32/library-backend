@@ -1,3 +1,4 @@
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `calcFines`()
 BEGIN
 	declare totalfines decimal;

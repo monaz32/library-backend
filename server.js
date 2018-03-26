@@ -32,6 +32,9 @@ require('./routes/event')(app);
 require('./routes/member')(app);
 require('./routes/schedules')(app);
 require('./routes/branches')(app);
+require('./routes/rating')(app);
+require('./routes/rental')(app);
+require('./routes/review')(app);
 
 //start server
 app.listen(8080, function () {
