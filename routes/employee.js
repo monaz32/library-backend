@@ -205,7 +205,7 @@ function employeeLogin(request, response){
         var split = JSON.stringify(rows[0]).split(':',2)[1];
         var numbers = split.match(/\d+/g).map(Number);
         var exists = numbers[0];
-        console.log(exists);
+        //console.log(exists);
 
         if (exists){
             connection.query('SELECT eid FROM employee WHERE eEmail=' + email + ';', function(error, rows, fields) {
