@@ -33,6 +33,7 @@ function getReviews(request, response) {
         });
 }
 
+//make a review from a member
 function makeReview(request, response) {
 
   var isbn      = formatVariableForSQL(request.params.isbn);
@@ -41,9 +42,7 @@ function makeReview(request, response) {
   var review    = formatVariableForSQL(request.body.review);
 
   var sql       = 'insert into review (accountID,isbn,rating,review) \
-                  values (' + accountID + ',' + isbn + ',' + rating + ',' + review + ')';
-
-  console.log(sql);  
+                  values (' + accountID + ',' + isbn + ',' + rating + ',' + review + ')'; 
 
         connection.query(sql, function(error, rows, fields){
             if(!!error) {
