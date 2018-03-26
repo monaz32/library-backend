@@ -12,6 +12,9 @@ module.exports = function(app) {
     app.route('/employee/name/:name')
         .get(getEmployeeName);
 
+    app.route('/employee/login')
+        .post(employeeLogin);
+
 }
 
 var connection = require('../server').connection;
@@ -181,6 +184,44 @@ function getEmployeeName(request, response) {
 
         console.log('Successfully retrieved employee!\n');
         response.send(rows);
+    });
+
+}
+
+function employeeLogin(request, response){
+    var employ = request.body;
+    var email = formatVariableForSQL(employ.email);
+    var password = formatVariableForSQL(employ.password);
+
+    var query = 'SELECT EXISTS(SELECT 1 FROM employee WHERE eEmail=' + email + ' AND ' + 'password=' + password + ');'
+    connection.query(query, function(error, rows, fields){
+        if(!!error) {
+            console.log('Error in the query\n');
+            response.status(422);
+            response.send('422 Unprocessable Entity');
+            return;
+        }
+
+        var split = JSON.stringify(rows[0]).split(':',2)[1];
+        var numbers = split.match(/\d+/g).map(Number);
+        var exists = numbers[0];
+        console.log(exists);
+
+        if (exists){
+            connection.query('SELECT eid FROM employee WHERE eEmail=' + email + ';', function(error, rows, fields) {
+                if (!!error) {
+                    console.log('Error in the query\n');
+                    response.status(422);
+                    response.send('422 Unprocessable Entity');
+                    return;
+                }
+                console.log('Successful login!\n');
+                response.send(rows);
+            });
+        } else {
+            console.log("Invalid email or password\n");
+            response.send("Invalid email or password");
+        }
     });
 
 }
