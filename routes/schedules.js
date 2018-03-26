@@ -39,6 +39,7 @@ function addSchedule(request, response) {
   var insertTimePeriodQuery = 'INSERT INTO TimePeriod value(' + fromTime + ', ' +
     toTime + ', ' + fromDate + ', ' + toDate + ')';
 
+
   var timeperiodIsDuplicate = 0;
 
   connection.query(insertTimePeriodQuery, function(error, rows, fields) {

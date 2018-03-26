@@ -12,7 +12,7 @@ module.exports = function(app) {
 
     app.route('/event/id/:id')
         .get(getEventId)
-        .put(updateEvent)
+        //.put(updateEvent)
         .delete(deleteEvent);
 
     app.route('/event/location')
@@ -80,8 +80,8 @@ function getEventId(request, response) {
 
         var id = request.params.id;
 
-        connection.query('SELECT * FROM event WHERE CURDATE() > STR_TO_DATE(toDate, \'%m/%d/%Y\') ' +
-            'ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%Y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
+        connection.query('SELECT * FROM event WHERE eventid=' + id +
+            ' ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%Y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
                 response.status(422);
@@ -98,11 +98,10 @@ function getEventId(request, response) {
 function getEventLocations(request, response) {
     var location = formatVariableForSQL(request.params.location);
 
-    var query = "SELECT librarybranch.name, phoneNum, address, event.name, fromTime, toTime, fromDate, toDate " +
+    var query = "SELECT event.name as eventName, librarybranch.name as branchName, address, phoneNum, fromTime, toTime, fromDate, toDate " +
         "FROM event INNER JOIN librarybranch ON event.branchNum = librarybranch.branchNum " +
         "ORDER BY STR_TO_DATE(fromDate, '%m/%d/%Y'), STR_TO_DATE(fromTime, '%H:%i');"
 
-    console.log(query)
     connection.query(query, function(error, rows, fields){
         if(!!error) {
             console.log('Error in the query\n');
@@ -121,11 +120,10 @@ function getEventLocations(request, response) {
 function getEventByLocation(request, response) {
         var location = formatVariableForSQL(request.params.location);
 
-        var query = "SELECT librarybranch.name, phoneNum, address, event.name, fromTime, toTime, fromDate, toDate " +
+        var query = "SELECT event.name as eventName, librarybranch.name as branchName, address, phoneNum, fromTime, toTime, fromDate, toDate " +
             "FROM event INNER JOIN librarybranch ON event.branchNum = librarybranch.branchNum " +
             "WHERE librarybranch.name=" + location +  " ORDER BY STR_TO_DATE(fromDate, '%m/%d/%Y'), STR_TO_DATE(fromTime, '%H:%i');"
 
-        console.log(query)
         connection.query(query, function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
@@ -228,7 +226,7 @@ function deleteEvent(request, response) {
 }
 
 
-function updateEvent(request, response) {
+/*function updateEvent(request, response) {
     var id = request.params.id;
     var event = request.body;
     var name = formatVariableForSQL(event.name);
@@ -258,7 +256,7 @@ function updateEvent(request, response) {
 
     });
 
-}
+}*/
 
 function formatVariableForSQL(oriObj) {
     if (typeof oriObj == 'string') {
