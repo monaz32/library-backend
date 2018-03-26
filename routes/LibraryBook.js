@@ -1,9 +1,11 @@
 //routes
 module.exports = function(app) {  
     app.route('/librarybook')
-        .get(getLibraryBooks) 
         .post(addLibraryBook)
         .put(updateLibraryBook);
+
+    app.route('/librarybook/filter')
+        .post(getLibraryBooks);
 
     app.route('/librarybook/:bookid')
         .get(getLibraryBook)
