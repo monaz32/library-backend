@@ -53,9 +53,7 @@ function getAVRRating(request, response) {
 	 
 	var isbn = formatVariableForSQL(request.params.isbn);
 
-	var sql = 'select AVG(rating) from review where isbn = ' + isbn;
-
-	console.log(sql);
+	var sql = 'select AVG(rating) AS rating from review where isbn = ' + isbn;
 
 	 connection.query(sql, function(error, rows, fields){
             if(!!error) {

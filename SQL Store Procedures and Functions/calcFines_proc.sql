@@ -26,7 +26,7 @@ BEGIN
 		set dayslate = Datediff (current_date(), STR_TO_DATE(rentaltodate, '%m/%d/%Y'));   
         
         if dayslate > 0 then
-			set totalfines = totalfines + dayslate;
+			set totalfines = totalfines + 1;
 		end if;
         
         update members
