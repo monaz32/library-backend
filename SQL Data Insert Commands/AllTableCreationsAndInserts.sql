@@ -182,6 +182,21 @@ FOREIGN KEY (fromTime, toTime, fromDate, toDate)
 REFERENCES TimePeriod (fromTime, toTime, fromDate, toDate)
 );
 
+delimiter //
+create trigger schedule_no_overlap before insert on schedules
+for each row
+begin
+  if exists (select * from schedules
+			 where roomName=new.roomName
+             and str_to_date(concat(fromTime, ' ', fromDate), '%H:%i %m/%d/%Y') <= str_to_date((concat(new.toTime, ' ', new.toDate)), '%H:%i %m/%d/%Y')
+             and   str_to_date(concat(toTime, ' ', toDate), '%H:%i %m/%d/%Y')     >= str_to_date((concat(new.fromTime, ' ', new.fromDate)), '%H:%i %m/%d/%Y')) then
+		signal sqlstate '45000' SET MESSAGE_TEXT = 'Overlaps with existing data';
+  end if;
+end; //
+
+delimiter ;
+
+
 LOAD DATA LOCAL INFILE '*****MYPATH/BookData.csv' 
 INTO TABLE Book 
 FIELDS TERMINATED BY ',' 
