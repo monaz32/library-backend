@@ -46,14 +46,15 @@ function getBooks(request, response) {
         }
 
         if(query[query.length - 1] == ',') {
-            query.replace(query.length - 1, '');
+            query = query.substring(0, query.length-1);
         }
     }
-
+    
     connection.query(query, function(error, rows, fields){
         if(!!error) {
             console.log('Error in the query\n');
-            throw error;
+            response.status(422);
+            response.send('422 Unprocessable Entity');
         }
 
         console.log('query SUCCESS!\n')
@@ -76,7 +77,6 @@ function addBook(request, response) {
 
             response.status(422);
             response.send('422 Unprocessable Entity');
-            throw error;
         }
 
         console.log('query SUCCESS!\n')
@@ -101,7 +101,6 @@ function updateBook(request, response) {
 
             response.status(422);
             response.send('422 Unprocessable Entity');
-            throw error;
         }
 
         console.log('query SUCCESS!\n')
@@ -120,7 +119,6 @@ function getBook(request, response) {
 
             response.status(422);
             response.send('422 Unprocessable Entity');
-            throw error;
         }
 
         console.log('query SUCCESS!\n')
@@ -139,7 +137,6 @@ function deleteBook(request, response) {
 
             response.status(422);
             response.send('422 Unprocessable Entity');
-            throw error;
         }
 
         console.log('query SUCCESS!\n')
