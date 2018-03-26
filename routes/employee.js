@@ -12,6 +12,9 @@ module.exports = function(app) {
     app.route('/employee/name/:name')
         .get(getEmployeeName);
 
+    app.route('/employee/login')
+        .post(employeeLogin);
+
 }
 
 var connection = require('../server').connection;
@@ -19,14 +22,8 @@ const duplicateSQLCode = 1062;
 
 //API functions
 function getEmployees(request, response) {
-    connection.connect(function(error) {
-        if(!!error) {
-            console.log('Error\n');
-            throw error;
-        }
-        console.log('Connected\n');
 
-        connection.query('SELECT eid, eEmail, sin, ename, eaddress, ephonenumber, branchnum, admin FROM employee', function(error, rows, fields){
+        connection.query('SELECT eid, eEmail, sin, ename, eaddress, ephonenumber, branchnum, adminStatus FROM employee;', function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
                 response.status(422);
@@ -34,15 +31,13 @@ function getEmployees(request, response) {
                 return;
             }
 
-            console.log('query SUCCESS!\n')
+            console.log('Successfully retreived all employees!\n')
             response.send(rows);
             //connection.end();
         });
-    });
 }
 
 function addEmployee(request, response) {
-    console.log(request.body);
 
     var employ = request.body;
     var email = employ.email;
@@ -72,10 +67,9 @@ function addEmployee(request, response) {
         console.log('Successfully got next eid!\n');
         var numbers = JSON.stringify(rows[0]).match(/\d+/g).map(Number);
         eid = numbers[0];
-        var query = 'INSERT INTO employee(eEmail,SIN,ename,eAddress,ePhoneNumber,branchNum, admin, password) '+ 'VALUES' +'(' + '\'' + email + '\',' + '\'' + sin + '\',' +
+        var query = 'INSERT INTO employee(eEmail,SIN,ename,eAddress,ePhoneNumber,branchNum, adminStatus, password) '+ 'VALUES' +'(' + '\'' + email + '\',' + '\'' + sin + '\',' +
             '\'' + name + '\',' + '\'' + address + '\',' + '\'' + phoneNum + '\',' + branch + ',' + admin + ',' + password + ');'
 
-        console.log(query);
 
         connection.query(query, function(error, rows, fields){
             if(!!error) {
@@ -105,7 +99,7 @@ function addEmployee(request, response) {
                 var query3 = 'INSERT INTO employeeworkedfor(eid, branchNum, fromDate, toDate, fromTime, toTime) ' +
                     'VALUES(' + eid + ',' + '\'' + branch + '\'' + ', DATE_FORMAT(curdate(), \'%m/%d/%y\'), \'present\',\'0:00\', \'present\');'
 
-                console.log(query3)
+
                 connection.query(query3, function(error, rows, fields){
                     if(!!error) {
                         console.log('Error in the query\n');
@@ -149,7 +143,7 @@ function updateEmployee(request, response) {
                 return;
             }
 
-            console.log('query SUCCESS!\n');
+            console.log('Successfully updated Employee!\n');
             response.status(200).send();
             //connection.end();
 
@@ -160,7 +154,7 @@ function updateEmployee(request, response) {
 function getEmployee(request, response) {
 
     var eid = request.params.id;
-    connection.query('SELECT eid, eEmail, sin, ename, eaddress, ephonenumber, branchnum, admin FROM employee WHERE eid=' + String(eid) +';', function(error, rows, fields){
+    connection.query('SELECT eid, eEmail, sin, ename, eaddress, ephonenumber, branchnum, adminStatus FROM employee WHERE eid=' + String(eid) +';', function(error, rows, fields){
         if(!!error) {
             console.log('Error in the query\n');
             response.status(422);
@@ -168,7 +162,7 @@ function getEmployee(request, response) {
             return;
         }
 
-        console.log('query SUCCESS!\n');
+        console.log('Successfully retrieved employee!\n');
         response.send(rows);
         //connection.end();
     });
@@ -178,8 +172,8 @@ function getEmployee(request, response) {
 function getEmployeeName(request, response) {
 
     var name = request.params.name;
-    var query = "SELECT eid, eEmail, sin, ename, eaddress, ephonenumber, branchnum, admin FROM employee WHERE ename LIKE " + "'%" + String(name) +"%';";
-    //console.log(query);
+    var query = "SELECT eid, eEmail, sin, ename, eaddress, ephonenumber, branchnum, adminStatus FROM employee WHERE ename LIKE " + "'%" + String(name) +"%';";
+
     connection.query(query, function(error, rows, fields){
         if(!!error) {
             console.log('Error in the query\n');
@@ -188,9 +182,46 @@ function getEmployeeName(request, response) {
             return;
         }
 
-        console.log('query SUCCESS!\n');
+        console.log('Successfully retrieved employee!\n');
         response.send(rows);
-        //connection.end();
+    });
+
+}
+
+function employeeLogin(request, response){
+    var employ = request.body;
+    var email = formatVariableForSQL(employ.email);
+    var password = formatVariableForSQL(employ.password);
+
+    var query = 'SELECT EXISTS(SELECT 1 FROM employee WHERE eEmail=' + email + ' AND ' + 'password=' + password + ');'
+    connection.query(query, function(error, rows, fields){
+        if(!!error) {
+            console.log('Error in the query\n');
+            response.status(422);
+            response.send('422 Unprocessable Entity');
+            return;
+        }
+
+        var split = JSON.stringify(rows[0]).split(':',2)[1];
+        var numbers = split.match(/\d+/g).map(Number);
+        var exists = numbers[0];
+        console.log(exists);
+
+        if (exists){
+            connection.query('SELECT eid FROM employee WHERE eEmail=' + email + ';', function(error, rows, fields) {
+                if (!!error) {
+                    console.log('Error in the query\n');
+                    response.status(422);
+                    response.send('422 Unprocessable Entity');
+                    return;
+                }
+                console.log('Successful login!\n');
+                response.send(rows);
+            });
+        } else {
+            console.log("Invalid email or password\n");
+            response.send("Invalid email or password");
+        }
     });
 
 }
