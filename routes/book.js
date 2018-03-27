@@ -145,7 +145,7 @@ function deleteBook(request, response) {
         }
 
         console.log('query SUCCESS!\n')
-        response.send();
+        response.send(rows);
     });
 }
 

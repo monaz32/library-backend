@@ -66,7 +66,7 @@ function addLibraryBook(request, response) {
         }
 
         console.log('query SUCCESS!\n')
-        response.send();
+        response.send(rows);
     });
 }
 
@@ -90,7 +90,7 @@ function updateLibraryBook(request, response) {
         }
 
         console.log('query SUCCESS!\n')
-        response.send();
+        response.send(rows);
     });
 }
 
@@ -126,6 +126,6 @@ function deleteLibraryBook(reqest, response) {
         }
 
         console.log('query SUCCESS!\n')
-        response.send();
+        response.send(rows);
     });
 }
