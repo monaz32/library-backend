@@ -220,7 +220,8 @@ function employeeLogin(request, response){
             });
         } else {
             console.log("Invalid email or password\n");
-            response.send(rows);
+            response.status(422);
+            response.send('422 Unprocessable Entity');
         }
     });
 
