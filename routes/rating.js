@@ -15,26 +15,30 @@ var connection = require('../server').connection;
 
 //API functions
 
-// Lowest Rated book averaged
+// Grab Books by rating Highest to Lowest
 function getMAXRating(request, response) {
 
-	var sql = 'call maxRatingproc();'
+	var sql =  'SELECT b.isbn,b.title, avg(r.rating) as average \
+				FROM book b, review r \
+				where b.isbn = r.isbn GROUP BY b.isbn order by average DESC;'
 
 	 connection.query(sql, function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
-                response.status(422);
                 response.send('422 Unprocessable Entity');
                 return;
             }
             console.log('query SUCCESS!\n')
-            response.send(rows[0]);
+            response.send(rows);
         });  
 }
 
-// Lowest Rated book averaged
+// Grab Books by rating Lowest to Highest
 function getMINRating(request, response) {
-	var sql = 'call minRatingproc();'
+
+	var sql = 'SELECT b.isbn,b.title, avg(r.rating) as average \
+				FROM book b, review r \
+				where b.isbn = r.isbn GROUP BY b.isbn order by average ASC;'
 
 	 connection.query(sql, function(error, rows, fields){
             if(!!error) {
@@ -44,7 +48,7 @@ function getMINRating(request, response) {
                 return;
             }
             console.log('query SUCCESS!\n')
-            response.send(rows[0]);
+            response.send(rows);
         });  
 }
 
@@ -62,7 +66,7 @@ function getAVRRating(request, response) {
                 response.send('422 Unprocessable Entity');
                 return;
             }
-            console.log('query SUCCESS!\n')
+            console.log('query SUCCESS!\n');
             response.send(rows);
         });  
 }
