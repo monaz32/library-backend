@@ -114,7 +114,7 @@ function getLibraryBook(request, response) {
 
 function deleteLibraryBook(reqest, response) {
     var isbn = request.params.bookID;
-    var query = 'DELETE * FROM LibraryBook \
+    var query = 'DELETE FROM LibraryBook \
     WHERE bookID="' +bookID +'"';
 
     connection.query(query, function(error, rows, fields){

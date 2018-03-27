@@ -130,7 +130,7 @@ function getBook(request, response) {
 
 function deleteBook(request, response) {
     var isbn = request.params.isbn;
-    var query = 'DELETE * FROM Book \
+    var query = 'DELETE FROM Book \
     WHERE isbn="' +isbn +'"';
 
     connection.query(query, function(error, rows, fields){
