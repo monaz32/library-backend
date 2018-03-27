@@ -74,7 +74,7 @@ function addMember(request, response) {
             }
 
             console.log('query SUCCESS!\n');
-            response.send('Member added Successfully!');
+            response.send(rows);
         });
         
 }
@@ -103,7 +103,7 @@ function updateMember(request, response) {
             }
 
             console.log('query SUCCESS!\n')
-            response.send('Info Updated!');
+            response.send(rows);
         });
 }
 
@@ -128,7 +128,7 @@ function memberLogin(request,response){
         console.log(exists);
 
         if (exists){
-                response.send('Successful login!');            
+                response.send(rows);            
         } else {
             console.log("Invalid email or password\n");
             response.send("Invalid email or password");
@@ -147,7 +147,7 @@ function calcfines(request,response){
                 return;
             }
             console.log('query SUCCESS!\n')
-            response.send('Fines have been updated!');
+            response.send(rows);
         });  
 }
 

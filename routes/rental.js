@@ -76,7 +76,6 @@ function addRental(request, response) {
                 return;
             }
             console.log('query SUCCESS!\n')
-            response.send();
         });  
 
       var sqlbook = 'update librarybook set status = 0 where bookid = ' + bookid;
@@ -89,7 +88,7 @@ function addRental(request, response) {
                 return;
             }
             console.log('query SUCCESS!\n')
-            response.send("Rental Added!");
+            response.send(rows);
         });  
 }
 
@@ -113,7 +112,6 @@ function returnRental(request, response) {
                 return;
             }
             console.log('query SUCCESS!\n')
-            response.send();
         });  
 
 	 var sqlbook = 'update librarybook set status = 1 where bookid = ' + bookid;
@@ -126,7 +124,7 @@ function returnRental(request, response) {
                 return;
             }
             console.log('query SUCCESS!\n')
-            response.send('Rental Returned!');
+            response.send(rows);
         });  
 
 }
