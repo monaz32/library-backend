@@ -53,7 +53,7 @@ function makeReview(request, response) {
             }
 
             console.log('query SUCCESS!\n')
-            response.send('Review Added!');
+            response.send(rows);
         });
 }
 
