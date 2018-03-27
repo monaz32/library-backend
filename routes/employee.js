@@ -109,7 +109,7 @@ function addEmployee(request, response) {
                     }
 
                     console.log('Successfully added EmployeeWorkedFor!\n');
-                    response.status(200).send();
+                    response.send(rows);
                     //connection.end();
                 });
 
@@ -144,7 +144,7 @@ function updateEmployee(request, response) {
             }
 
             console.log('Successfully updated Employee!\n');
-            response.status(200).send();
+            response.status(200).send(rows);
             //connection.end();
 
         });
@@ -220,7 +220,7 @@ function employeeLogin(request, response){
             });
         } else {
             console.log("Invalid email or password\n");
-            response.send("Invalid email or password");
+            response.send(rows);
         }
     });
 

@@ -78,9 +78,9 @@ function getEventsPast(request, response) {
 
 function getEventId(request, response) {
 
-        var id = request.params.id;
+        var eventid = request.params.id;
 
-        connection.query('SELECT * FROM event WHERE eventid=' + id +
+        connection.query('SELECT * FROM event WHERE eventid=' + eventid +
             ' ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%Y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
@@ -195,7 +195,7 @@ function addEvent(request, response) {
             }
             else {
                 console.log('addSchedule query SUCCESS: added to Schedules\n');
-                response.send();
+                response.send(rows);
             }
         });
 
@@ -219,7 +219,7 @@ function deleteEvent(request, response) {
         }
 
         console.log('Event successfully deleted!\n');
-        response.send();
+        response.send(rows);
         //connection.end();
     });
 	
