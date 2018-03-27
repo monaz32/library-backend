@@ -85,7 +85,7 @@ function addSchedule(request, response) {
       }
       else {
         console.log('addSchedule query SUCCESS: added to Schedules\n');
-        response.send();
+        response.send(row);
       }
     });
   });
