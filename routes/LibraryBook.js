@@ -12,6 +12,8 @@ module.exports = function(app) {
         .delete(deleteLibraryBook);
 }
 
+var connection = require('../server').connection;
+
 function getLibraryBooks(request, response) {
     var branchNum = request.body.branchNum;
     var status = request.body.status;
@@ -21,7 +23,7 @@ function getLibraryBooks(request, response) {
         query += ' WHERE ';
         
         if(branchNum) {
-            branchNumFilter = 'branchNum = ' +branchNum +'",';
+            branchNumFilter = 'branchNum = "' +branchNum +'" AND ';
             query += branchNumFilter;
         }
 
@@ -30,8 +32,8 @@ function getLibraryBooks(request, response) {
             query += statusFilter;
         }
 
-        if(query[query.length - 1] == ',') {
-            query = query.substring(0, query.length-1);
+        if(query.substring(query.length - 4, query.length - 1) == 'AND') {
+            query = query.substring(0, query.length - 4);
         }
     }
 

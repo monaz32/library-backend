@@ -26,29 +26,31 @@ function getBooks(request, response) {
         query += ' WHERE ';
         
         if(title) {
-            titleFilter = 'title = ' +title +'",';
+            titleFilter = 'title LIKE "%' +title +'%" AND ';
             query += titleFilter;
         }
 
-        else if(author) {
-            authorFilter = 'author = "' +author +'",';
+        if(author) {
+            authorFilter = 'author LIKE "%' +author +'%" AND ';
             query += authorFilter;
         }
 
-        else if(publisher) {
-            publisherFilter = 'publisher = "' +publisher +'",';
+        if(publisher) {
+            publisherFilter = 'publisher LIKE "%' +publisher +'%" AND ';
             query += publisherFilter;
         }
 
-        else if(genre) {
-            genreFilter = 'genre = "' +genre +'"';
+        if(genre) {
+            genreFilter = 'genre LIKE "%' +genre +'%"';
             query += genreFilter;
         }
 
-        if(query[query.length - 1] == ',') {
-            query = query.substring(0, query.length-1);
+        if(query.substring(query.length - 4, query.length - 1) == 'AND') {
+            query = query.substring(0, query.length - 4);
         }
     }
+
+    console.log(query);
     
     connection.query(query, function(error, rows, fields){
         if(!!error) {
