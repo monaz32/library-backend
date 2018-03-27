@@ -128,12 +128,23 @@ function memberLogin(request,response){
         console.log(exists);
 
         if (exists){
-                response.send(rows);            
+            connection.query('SELECT accountID FROM members WHERE email=' + email + ';', function(error, rows, fields) {
+                if (!!error) {
+                    console.log('Error in the query\n');
+                    response.status(422);
+                    response.send('422 Unprocessable Entity');
+                    return;
+                }
+                console.log('Successful login!\n');
+                response.send(rows);
+            });
         } else {
             console.log("Invalid email or password\n");
-            response.send("Invalid email or password");
+            response.status(422);
+            response.send('422 Unprocessable Entity');
         }
     });
+
 }
 
 function calcfines(request,response){
