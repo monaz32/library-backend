@@ -7,6 +7,9 @@ module.exports = function(app) {
     app.route('/book/filter')
         .post(getBooks);
 
+    app.route('/book/genrecount')
+        .get(getBookGenreCount);
+
     app.route('/book/:isbn')
         .get(getBook)
         .delete(deleteBook);
@@ -143,5 +146,22 @@ function deleteBook(request, response) {
 
         console.log('query SUCCESS!\n')
         response.send();
+    });
+}
+
+function getBookGenreCount(request, response) {
+    var query = 'SELECT genre, count(*) AS count FROM Book \
+    GROUP BY genre';
+
+    connection.query(query, function(error, rows, fields){
+        if(!!error) {
+            console.log('Error in the query\n');
+
+            response.status(422);
+            response.send('422 Unprocessable Entity');
+        }
+
+        console.log('query SUCCESS!\n')
+        response.send(rows);
     });
 }
