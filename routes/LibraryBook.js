@@ -7,7 +7,7 @@ module.exports = function(app) {
     app.route('/librarybook/filter')
         .post(getLibraryBooks);
 
-    app.route('/librarybook/:bookid')
+    app.route('/librarybook/:bookID')
         .get(getLibraryBook)
         .delete(deleteLibraryBook);
 }
@@ -95,9 +95,9 @@ function updateLibraryBook(request, response) {
 }
 
 function getLibraryBook(request, response) {
-    var isbn = request.params.bookID;
+    var bookID = request.params.bookID;
     var query = 'SELECT * FROM LibraryBook \
-    WHERE bookID="' +bookID +'"';
+    WHERE bookID="' + bookID +'"';
 
     connection.query(query, function(error, rows, fields){
         if(!!error) {
@@ -113,9 +113,9 @@ function getLibraryBook(request, response) {
 }
 
 function deleteLibraryBook(reqest, response) {
-    var isbn = request.params.bookID;
+    var bookID = request.params.bookID;
     var query = 'DELETE FROM LibraryBook \
-    WHERE bookID="' +bookID +'"';
+    WHERE bookID="' + bookID +'"';
 
     connection.query(query, function(error, rows, fields){
         if(!!error) {
