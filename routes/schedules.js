@@ -117,8 +117,9 @@ function getSchedulesWithAccountID(request, response) {
 /////////////////// schedules/:roomname ///////////////////
 function getSchedulesWithRoomName(request, response) {
   connection.connect(function(error) {
-    var roomname = formatVariableForSQL(request.params.roomname);
-    var getSchedulesQuery = 'SELECT * FROM schedules where roomName = ' + roomname;
+    var roomname = formatVariableForSQL('%' + request.params.roomname + '%');
+    var getSchedulesQuery = 'SELECT * FROM schedules where roomName LIKE ' + roomname;
+    console.log(getSchedulesQuery)
 
     connection.query(getSchedulesQuery, function(error, row, fields) {
       if (!!error) {
