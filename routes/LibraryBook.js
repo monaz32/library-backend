@@ -18,27 +18,8 @@ module.exports = function(app) {
 var connection = require('../server').connection;
 
 function getLibraryBooks(request, response) {
-    var branchNum = request.body.branchNum;
-    var status = request.body.status;
-    var query = 'SELECT * FROM LibraryBook';
-
-    if(branchNum || status) {
-        query += ' WHERE ';
-        
-        if(branchNum) {
-            branchNumFilter = 'branchNum = "' +branchNum +'" AND ';
-            query += branchNumFilter;
-        }
-
-       if(request.body.hasOwnProperty('status')) {
-            statusFilter = 'status = "' +status +'"';
-            query += statusFilter;
-        }
-
-        if(query.substring(query.length - 4, query.length - 1) == 'AND') {
-            query = query.substring(0, query.length - 4);
-        }
-    }
+    var isbn = request.body.isbn;
+    var query = 'SELECT * FROM LibraryBook WHERE isbn = ' +'"' +isbn +'"';
 
     connection.query(query, function(error, rows, fields){
         if(!!error) {
@@ -119,7 +100,7 @@ function getLibraryBook(request, response) {
     });
 }
 
-function deleteLibraryBook(reqest, response) {
+function deleteLibraryBook(request, response) {
     var bookID = request.params.bookID;
     var query = 'DELETE FROM LibraryBook \
     WHERE bookID="' + bookID +'"';
@@ -139,17 +120,17 @@ function deleteLibraryBook(reqest, response) {
 }
 
 function getLibraryBookCount(reqest, response) {
-    var query = 'Select Count(bookID) as Count from LibraryBook;'
+  var query = 'Select Count(bookID) as Count from LibraryBook;'
 
-    connection.query(query, function(error, rows, fields){
-        if(!!error) {
-            console.log('Error in the query\n');
-
-            response.status(422);
-            response.send('422 Unprocessable Entity');
-        }
-        else {
-          console.log('query SUCCESS!\n')
-          response.send(rows);
-        }
-    });
+  connection.query(query, function (error, rows, fields) {
+    if (!!error) {
+      console.log('Error in the query\n');
+      response.status(422);
+      response.send('422 Unprocessable Entity');
+    }
+    else {
+      console.log('query SUCCESS!\n')
+      response.send(rows);
+    }
+  });
+}

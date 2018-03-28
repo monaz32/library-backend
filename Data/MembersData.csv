@@ -1,5 +1,5 @@
 accountID,phoneNum,email,name,fines,password
-11111,6048737789,m.adams@email.com,"Adams, Mufasa",0,cs304
+11111,6048737789,m.adams@email.com,"Adams, Mufasa",10.00,cs304
 12345,6048861467,s.baker@email.com,"Baker, Sarabi",0,cs304
 13579,6048985145,s.clark@email.com,"Clark, Simba",0,cs304
 14813,6049108823,n.davis@email.com,"Davis, Nala",0,cs304
