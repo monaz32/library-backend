@@ -1,11 +1,14 @@
 //routes
 module.exports = function(app) {  
     app.route('/rental/:id')
-        .get(getRentals)
+        .get(getCurrentRentals)
         .post(addRental);
 
     app.route('/rental/return')
-        .put(returnRental)
+        .put(returnRental);
+
+    app.route('/rental/history/:id')
+        .get(getRentalHistory)
 }
 
 var connection = require('../server').connection;
@@ -14,12 +17,33 @@ const duplicateSQLCode = 1062;
 //API functions
 
 //gets ALL current rentals of a specific id
-function getRentals(request, response) {
+function getCurrentRentals(request, response) {
 	console.log('Connected\n');
 
 	var id = request.params.id;
 
 	sql = 'select * from rental where status = 0 and accountID = ' + id;
+
+        connection.query(sql, function(error, rows, fields){
+            if(!!error) {
+                console.log('Error in the query\n');
+                response.status(422);
+                response.send('422 Unprocessable Entity');
+                return;
+            }
+
+            console.log('query SUCCESS!\n')
+            response.send(rows);
+        });
+}
+
+//gets ALL current rentals of a specific id
+function getRentalHistory(request, response) {
+    console.log('Connected\n');
+
+    var id = request.params.id;
+
+    sql = 'select * from rental where accountID = ' + id;
 
         connection.query(sql, function(error, rows, fields){
             if(!!error) {
