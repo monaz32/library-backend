@@ -153,3 +153,4 @@ function getLibraryBookCount(reqest, response) {
           response.send(rows);
         }
     });
+}

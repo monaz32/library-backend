@@ -10,6 +10,9 @@ module.exports = function(app) {
 
   app.route('/branches/:bid/rooms/:rid')
     .get(getRoomWithIDAtBranch);
+
+  app.route('/branches/books/allbooks')
+  	.get(getBranchWithAllBooks)
 }
 
 var connection = require('../server').connection;
@@ -90,6 +93,25 @@ function getRoomWithIDAtBranch(request, response) {
     }
   });
 }
+
+function getBranchWithAllBooks(request,response){
+
+
+	var sql = "call Division();"
+
+	connection.query(sql, function(error, rows, fields){
+    if(!!error) {
+      console.log('Error in getRoomWithIDAtBranch query: failed to get all branches\n');
+      logErrorToConsole(error);
+      response.status(422).send('422 Unprocessable Entity');
+    }
+    else {
+      console.log('getRoomWithIDAtBranch query SUCCESS\n')
+      response.send(rows[0]);
+    }
+  });
+}
+
 
 
 /////////////////// Utilities ///////////////////
