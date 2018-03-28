@@ -100,7 +100,7 @@ function getLibraryBook(request, response) {
     });
 }
 
-function deleteLibraryBook(reqest, response) {
+function deleteLibraryBook(request, response) {
     var bookID = request.params.bookID;
     var query = 'DELETE FROM LibraryBook \
     WHERE bookID="' + bookID +'"';
@@ -120,18 +120,17 @@ function deleteLibraryBook(reqest, response) {
 }
 
 function getLibraryBookCount(reqest, response) {
-    var query = 'Select Count(bookID) as Count from LibraryBook;'
+  var query = 'Select Count(bookID) as Count from LibraryBook;'
 
-    connection.query(query, function(error, rows, fields){
-        if(!!error) {
-            console.log('Error in the query\n');
-
-            response.status(422);
-            response.send('422 Unprocessable Entity');
-        }
-        else {
-          console.log('query SUCCESS!\n')
-          response.send(rows);
-        }
-    });
+  connection.query(query, function (error, rows, fields) {
+    if (!!error) {
+      console.log('Error in the query\n');
+      response.status(422);
+      response.send('422 Unprocessable Entity');
+    }
+    else {
+      console.log('query SUCCESS!\n')
+      response.send(rows);
+    }
+  });
 }
