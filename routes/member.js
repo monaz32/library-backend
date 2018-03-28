@@ -86,12 +86,10 @@ function updateMember(request, response) {
 	var phoneNum       = formatVariableForSQL(request.body.phoneNum);
 	var fines          = formatVariableForSQL(request.body.fines);
 	var id             = formatVariableForSQL(request.params.id);
-    var password       = formatVariableForSQL(request.body.password);
 
 	  var sql ='update members set phoneNum = ' + phoneNum ;
 
 	  sql = sql + ', fines = ' + fines; 
-      sql = sql + ', password = ' + password;
 	  sql = sql + ' where accountid = ' + id ;
 
         connection.query(sql, function(error, rows, fields){
