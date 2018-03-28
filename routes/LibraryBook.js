@@ -27,7 +27,7 @@ function getLibraryBooks(request, response) {
             query += branchNumFilter;
         }
 
-        else if(status) {
+       if(request.body.hasOwnProperty('status')) {
             statusFilter = 'status = "' +status +'"';
             query += statusFilter;
         }
