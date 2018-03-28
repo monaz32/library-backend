@@ -35,12 +35,12 @@ function getLibraryBooks(request, response) {
 }
 
 function addLibraryBook(request, response) {
-    var bookID = request.body.bookid;
     var isbn = request.body.isbn;
     var branchNum = request.body.branchNum;
-    var status = request.body.status;
-    var query = 'INSERT INTO LibraryBook (bookID, isbn, branchNum, status) \
-    Values ("' +bookID +'", "' +isbn +'", "' +branchNum +'", "' +status +'")';
+    var query = 'INSERT INTO LibraryBook (isbn, branchNum, status) \
+    Values ("' +isbn +'", "' +branchNum +'", "1")';
+
+    console.log(query);
 
     connection.query(query, function(error, rows, fields){
         if(!!error) {
@@ -58,12 +58,11 @@ function addLibraryBook(request, response) {
 
 function updateLibraryBook(request, response) {
     var bookID = request.body.bookid;
-    var isbn = request.body.isbn;
     var branchNum = request.body.branchNum;
     var status = request.body.status;
 
     var query = 'UPDATE LibraryBook \
-    Set isbn="' +isbn +'", branchNum="' +branchNum +'",\
+    Set branchNum="' +branchNum +'",\
     status="' +status +'" \
     WHERE bookid = "' +bookID +'"';
 
