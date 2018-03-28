@@ -10,6 +10,9 @@ module.exports = function(app) {
     app.route('/librarybook/:bookID')
         .get(getLibraryBook)
         .delete(deleteLibraryBook);
+
+    app.route('/librarybook/count')
+        .get(getLibraryBookCount);
 }
 
 var connection = require('../server').connection;
@@ -134,3 +137,19 @@ function deleteLibraryBook(reqest, response) {
         }
     });
 }
+
+function getLibraryBookCount(reqest, response) {
+    var query = 'Select Count(bookID) as Count from LibraryBook;'
+
+    connection.query(query, function(error, rows, fields){
+        if(!!error) {
+            console.log('Error in the query\n');
+
+            response.status(422);
+            response.send('422 Unprocessable Entity');
+        }
+        else {
+          console.log('query SUCCESS!\n')
+          response.send(rows);
+        }
+    });
