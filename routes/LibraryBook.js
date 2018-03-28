@@ -15,27 +15,9 @@ module.exports = function(app) {
 var connection = require('../server').connection;
 
 function getLibraryBooks(request, response) {
-    var branchNum = request.body.branchNum;
-    var status = request.body.status;
-    var query = 'SELECT * FROM LibraryBook';
-
-    if(branchNum || status) {
-        query += ' WHERE ';
-        
-        if(branchNum) {
-            branchNumFilter = 'branchNum = "' +branchNum +'" AND ';
-            query += branchNumFilter;
-        }
-
-        else if(status) {
-            statusFilter = 'status = "' +status +'"';
-            query += statusFilter;
-        }
-
-        if(query.substring(query.length - 4, query.length - 1) == 'AND') {
-            query = query.substring(0, query.length - 4);
-        }
-    }
+    var isbn = request.body.isbn;
+    var query = 'SELECT * FROM LibraryBook WHERE isbn = ' +'"' +isbn +'"';
+    console.log(query);
 
     connection.query(query, function(error, rows, fields){
         if(!!error) {
