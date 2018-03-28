@@ -40,12 +40,15 @@ function addRental(request, response) {
 	  var accountid = formatVariableForSQL(request.params.id);
 	  var bookid 	= formatVariableForSQL(request.body.bookID);
 	  var fromTime 	= formatVariableForSQL(request.body.fromTime);
-	  var toTime 	= formatVariableForSQL(request.body.toTime);
+
+      //  toTime should be equal to from time
+	  var toTime 	= formatVariableForSQL(request.body.fromTime);
 	  var fromDate 	= formatVariableForSQL(request.body.fromDate);
-	  var toDate 	= formatVariableForSQL(request.body.toDate);
+	  //  Adding 14 days to from date 
+	  var toDate 	= formatVariableForSQL(request.body.fromDate);
 
 	  var insertTimePeriodQuery = 'INSERT INTO TimePeriod value(' + fromTime + ', ' +
-    	toTime + ', ' + fromDate + ', ' + toDate + ')';
+    	toTime + ', ' + fromDate + ', date_format(date_add(str_to_date(' + toDate + ',\'%m/%d/%Y\' ), INTERVAL 14 DAY),\'%m/%d/%Y\'));';
 
     	var timeperiodIsDuplicate = 0;
 
@@ -65,7 +68,10 @@ function addRental(request, response) {
 	});
 
 	  var sqlrental ='insert into rental (status,bookid,accountID,fromTime,toTime,fromDate,toDate,returnTime,returnDate)\
-	   values (0,' + bookid + ',' + accountid + ',' + fromTime + ',' + toTime + ',' + fromDate + ',' + toDate + ',null,null)' 
+	   values (0,' + bookid + ',' + accountid + ',' + fromTime + ',' + toTime + ',' + 
+	   fromDate + ', date_format(date_add(str_to_date(' + toDate + ',\'%m/%d/%Y\' ), INTERVAL 14 DAY),\'%m/%d/%Y\')\
+	   ,null,null);' 
+
 	   console.log(sqlrental);
 
         connection.query(sqlrental, function(error, rows, fields){
