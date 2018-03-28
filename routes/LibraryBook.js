@@ -43,9 +43,10 @@ function getLibraryBooks(request, response) {
             response.status(422);
             response.send('422 Unprocessable Entity');
         }
-
-        console.log('query SUCCESS!\n')
-        response.send(rows);
+        else {
+          console.log('query SUCCESS!\n')
+          response.send(rows);
+        }
     });
 }
 
@@ -64,9 +65,10 @@ function addLibraryBook(request, response) {
             response.status(422);
             response.send('422 Unprocessable Entity');
         }
-
-        console.log('query SUCCESS!\n')
-        response.send(rows);
+        else {
+          console.log('query SUCCESS!\n')
+          response.send(rows);
+        }
     });
 }
 
@@ -88,9 +90,10 @@ function updateLibraryBook(request, response) {
             response.status(422);
             response.send('422 Unprocessable Entity');
         }
-
-        console.log('query SUCCESS!\n')
-        response.send(rows);
+        else {
+          console.log('query SUCCESS!\n')
+          response.send(rows);
+        }
     });
 }
 
@@ -106,9 +109,10 @@ function getLibraryBook(request, response) {
             response.status(422);
             response.send('422 Unprocessable Entity');
         }
-
-        console.log('query SUCCESS!\n')
-        response.send(rows);
+        else {
+          console.log('query SUCCESS!\n')
+          response.send(rows);
+        }
     });
 }
 
@@ -124,8 +128,9 @@ function deleteLibraryBook(reqest, response) {
             response.status(422);
             response.send('422 Unprocessable Entity');
         }
-
-        console.log('query SUCCESS!\n')
-        response.send(rows);
+        else {
+          console.log('query SUCCESS!\n')
+          response.send(rows);
+        }
     });
 }
