@@ -116,7 +116,7 @@ function getLibraryBook(request, response) {
     });
 }
 
-function deleteLibraryBook(reqest, response) {
+function deleteLibraryBook(request, response) {
     var bookID = request.params.bookID;
     var query = 'DELETE FROM LibraryBook \
     WHERE bookID="' + bookID +'"';
