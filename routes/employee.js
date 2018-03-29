@@ -106,7 +106,7 @@ function addEmployee(request, response) {
                         return;
                     }
 
-                    connection.query('select max(eID) as newID from employee', function(error, row, fields) {
+                    connection.query('select eID as newID from employee WHERE email=' + String(email) +';' , function(error, row, fields) {
                       if(!!error) {
                         console.log('Error in the query get max id\n');
                         response.status(422);
