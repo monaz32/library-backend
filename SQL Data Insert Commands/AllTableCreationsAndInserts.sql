@@ -266,7 +266,13 @@ SELECT DISTINCT branchNum
 	drop table branchlist;
     
 END$$
-delimiter;
+delimiter ;
+
+CREATE TRIGGER libraryBookStatusTrigger AFTER UPDATE ON rental
+FOR EACH ROW
+  UPDATE libraryBook
+     SET status = 1
+   WHERE bookID = NEW.bookID;
 
 LOAD DATA LOCAL INFILE '****MYPATH/BookData.csv' 
 INTO TABLE Book 
