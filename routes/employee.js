@@ -70,7 +70,6 @@ function addEmployee(request, response) {
         var query = 'INSERT INTO employee(eEmail,SIN,ename,eAddress,ePhoneNumber,branchNum, adminStatus, password) '+ 'VALUES' +'(' + '\'' + email + '\',' + '\'' + sin + '\',' +
             '\'' + name + '\',' + '\'' + address + '\',' + '\'' + phoneNum + '\',' + branch + ',' + admin + ',' + password + ');'
 
-
         connection.query(query, function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
@@ -126,14 +125,11 @@ function updateEmployee(request, response) {
 
         var eid = request.params.id;
         var employ = request.body;
-        var email = formatVariableForSQL(employ.email);
         var address = formatVariableForSQL(employ.address);
         var phoneNum = formatVariableForSQL(employ.phoneNum);
-        var password = formatVariableForSQL(employ.password);
 
-        var query = 'UPDATE employee SET eEmail=' + email + ", eAddress=" + address + ", ePhoneNumber=" + phoneNum +  ", password=" + password +
+        var query = "UPDATE employee SET  eAddress=" + address + ", ePhoneNumber=" + phoneNum +
             " WHERE eid=" + eid + ";"
-
 
         connection.query(query, function(error, rows, fields) {
             if (!!error) {
