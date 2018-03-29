@@ -7,12 +7,13 @@ module.exports = function(app) {
     app.route('/librarybook/filter')
         .post(getLibraryBooks);
 
+    app.route('/librarybook/count')
+        .get(getLibraryBookCount);
+
     app.route('/librarybook/:bookID')
         .get(getLibraryBook)
         .delete(deleteLibraryBook);
 
-    app.route('/librarybook/count')
-        .get(getLibraryBookCount);
 }
 
 var connection = require('../server').connection;
@@ -132,5 +133,4 @@ function getLibraryBookCount(reqest, response) {
       response.send(rows);
     }
   });
-
 }
