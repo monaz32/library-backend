@@ -105,18 +105,9 @@ function addEmployee(request, response) {
                         response.send('422 Unprocessable Entity');
                         return;
                     }
-
-                    connection.query('select max(eID) as newID from employee', function(error, row, fields) {
-                      if(!!error) {
-                        console.log('Error in the query get max id\n');
-                        response.status(422);
-                        response.send('422 Unprocessable Entity');
-                        return;
-                      }
-
-                      console.log('Successfully added EmployeeWorkedFor!\n');
-                      response.send(row);
-                    });
+                    else{
+                        response.send(rows);
+                    }    
                 });
 
             });
