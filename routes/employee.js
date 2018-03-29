@@ -116,7 +116,6 @@ function addEmployee(request, response) {
 
     });
 
-
 }
 
 function updateEmployee(request, response) {
