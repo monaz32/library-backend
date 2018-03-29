@@ -64,7 +64,6 @@ function addEmployee(request, response) {
             return;
         }
 
-        console.log('Successfully got next eid!\n');
         var numbers = JSON.stringify(rows[0]).match(/\d+/g).map(Number);
         eid = numbers[0];
         var query = 'INSERT INTO employee(eEmail,SIN,ename,eAddress,ePhoneNumber,branchNum, adminStatus, password) '+ 'VALUES' +'(' + '\'' + email + '\',' + '\'' + sin + '\',' +
@@ -72,7 +71,7 @@ function addEmployee(request, response) {
 
         connection.query(query, function(error, rows, fields){
             if(!!error) {
-                console.log('Error in the query\n');
+                console.log('Error in the query insert employee\n');
                 response.status(422);
                 response.send('422 Unprocessable Entity');
                 return;
@@ -85,7 +84,7 @@ function addEmployee(request, response) {
             connection.query(query2, function(error, rows, fields){
                 if(!!error) {
                     if (error.errno != duplicateSQLCode) {
-                        console.log('Error in the query\n');
+                        console.log('Error in the query time period\n');
                         response.status(422);
                         response.send('422 Unprocessable Entity');
                         return;
@@ -101,15 +100,23 @@ function addEmployee(request, response) {
 
                 connection.query(query3, function(error, rows, fields){
                     if(!!error) {
-                        console.log('Error in the query\n');
+                        console.log('Error in the query add employee worked for\n');
                         response.status(422);
                         response.send('422 Unprocessable Entity');
                         return;
                     }
 
-                    console.log('Successfully added EmployeeWorkedFor!\n');
-                    response.send(rows);
-                    //connection.end();
+                    connection.query('select max(eID) as newID from employee', function(error, row, fields) {
+                      if(!!error) {
+                        console.log('Error in the query get max id\n');
+                        response.status(422);
+                        response.send('422 Unprocessable Entity');
+                        return;
+                      }
+
+                      console.log('Successfully added EmployeeWorkedFor!\n');
+                      response.send(row);
+                    });
                 });
 
             });

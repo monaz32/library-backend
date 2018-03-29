@@ -73,10 +73,18 @@ function addMember(request, response) {
                 return;
             }
 
-            console.log('query SUCCESS!\n');
-            response.send(rows);
+            connection.query('select max(accountID) as newID from members', function(error, row, fields) {
+              if(!!error) {
+                console.log('Error in the query\n');
+                response.status(422);
+                response.send('422 Unprocessable Entity');
+                return;
+              }
+
+              console.log('query SUCCESS!\n');
+              response.send(row);
+          });
         });
-        
 }
 
 
