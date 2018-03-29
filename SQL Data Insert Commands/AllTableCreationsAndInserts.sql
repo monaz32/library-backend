@@ -237,6 +237,37 @@ BEGIN
 END $$
 delimiter ;
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Division`()
+BEGIN
+	CREATE TABLE isbnlist (isbn varchar(13));
+
+    CREATE TABLE branchlist (branchNum int,isbn varchar(13));
+
+    
+    
+    insert into isbnlist 
+    select distinct isbn from librarybook;
+    
+    insert into branchlist
+    select branchNum,isbn from librarybook;
+    
+SELECT DISTINCT branchNum
+  FROM branchlist AS PS1 
+  WHERE NOT EXISTS
+       (SELECT *
+          FROM isbnlist
+         WHERE NOT EXISTS
+               (SELECT *
+                  FROM branchlist AS PS2
+                 WHERE (PS1.branchNum = PS2.branchNum)
+                   AND (PS2.isbn = isbnlist.isbn)));
+	  drop table isbnlist;
+	drop table branchlist;
+    
+END$$
+delimiter;
+
 LOAD DATA LOCAL INFILE '****MYPATH/BookData.csv' 
 INTO TABLE Book 
 FIELDS TERMINATED BY ',' 
