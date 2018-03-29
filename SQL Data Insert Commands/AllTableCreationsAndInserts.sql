@@ -1,7 +1,7 @@
 ###### 1) IF YOU ARE ON MAC YOU NEED TO CHANGE THE LINE TERMINATION FROM \r\n to \n #####
 ###### To do this you need to find \r\n and replace with \n ##############
 ###### 2) YOU NEED TO CHANGE THE PATHWAY TO YOUR LOCAL DRIVE WHERE THE CSV'S ARE STORED #####
-###### To do this you need to find C:/Project_library/library-backend/Data and REPLACE ALL with your path ########
+###### To do this you need to find *****MYPATH and REPLACE ALL with your path ########
 ###### example path for : C:/Users/Nancy Wu/library-backend/Data #####
 
 CREATE TABLE Book 
@@ -273,84 +273,84 @@ FOR EACH ROW
      SET status = 1
    WHERE bookID = NEW.bookID;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/BookData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/BookData.csv' 
 INTO TABLE Book 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/TimePeriodData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/TimePeriodData.csv' 
 INTO TABLE timeperiod
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/LibraryBranchData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/LibraryBranchData.csv' 
 INTO TABLE librarybranch 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/MembersData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/MembersData.csv' 
 INTO TABLE members
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/EmployeeData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/EmployeeData.csv' 
 INTO TABLE employee 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/LibraryBookData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/LibraryBookData.csv' 
 INTO TABLE librarybook 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/RentalData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/RentalData.csv' 
 INTO TABLE rental
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/ReviewData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/ReviewData.csv' 
 INTO TABLE review
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/RoomData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/RoomData.csv' 
 INTO TABLE room 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/EmployeeWorkedForData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/EmployeeWorkedForData.csv' 
 INTO TABLE employeeworkedfor
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/SchedulesData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/SchedulesData.csv' 
 INTO TABLE schedules
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Project_library/library-backend/Data/EventData.csv' 
+LOAD DATA LOCAL INFILE '*****MYPATH/EventData.csv' 
 INTO TABLE event
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
