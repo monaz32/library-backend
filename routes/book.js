@@ -17,6 +17,8 @@ module.exports = function(app) {
 
 var connection = require('../server').connection;
 
+const duplicateSQLCode = 1062;
+
 //API functions
 function getBooks(request, response) {
     var title = request.body.title;
@@ -73,20 +75,43 @@ function addBook(request, response) {
     var author = request.body.author;
     var publisher = request.body.publisher;
     var genre = request.body.genre; 
+    var branchNum = request.body.branchNum;
+
+
     var query = 'INSERT INTO Book (isbn, title, author, publisher, genre) \
     Values ("' +isbn +'", "' +title +'", "' +author +'", "' +publisher +'", "' +genre +'")';
 
-    connection.query(query, function(error, rows, fields){
+    console.log(query);
+    
+    connection.query(query, function(error, rows, fields) {
         if(!!error) {
-            console.log('Error in the query\n');
-
-            response.status(422);
+          if (error.errno == duplicateSQLCode) {
+            console.log('WARNING: Entry already exists in Book\n');
+          }
+          else {
+            console.log('Error adding book');
             response.send('422 Unprocessable Entity');
+            return;
+          }
         }
 
-        console.log('query SUCCESS!\n')
-        response.send(rows);
-    });
+            var query2 = 'INSERT INTO LibraryBook (isbn, branchNum, status) \
+            Values ("' +isbn +'", "' +branchNum +'", "1")';
+
+            console.log(query2);
+
+            connection.query(query2, function(error, rows, fields){
+                if(!!error) {
+                    console.log('Error in the query2\n');
+
+                    response.status(422);
+                    response.send('422 Unprocessable Entity');
+                }
+
+                console.log('query SUCCESS!\n')
+                response.send(rows);
+            });
+        });
 }
 
 function updateBook(request, response) {
