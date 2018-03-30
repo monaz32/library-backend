@@ -4,7 +4,7 @@ CREATE TABLE Members(
 	phoneNum		varchar(100),
 	email 			varchar(100) NOT NULL,
 	name			varchar(100),
-	fines			DECIMAL,
+	fines			Double,
 	password		varchar(100),
 	UNIQUE(email),
 	PRIMARY KEY(accountID)
