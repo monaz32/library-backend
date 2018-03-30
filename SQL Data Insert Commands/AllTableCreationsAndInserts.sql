@@ -274,6 +274,17 @@ FOR EACH ROW
      SET status = 1
    WHERE bookID = NEW.bookID;
 
+delimiter $$
+create trigger correct_times before insert on timeperiod
+for each row
+begin
+  if str_to_date((concat(new.fromTime, ' ', new.fromDate)), '%H:%i %m/%d/%y') >= str_to_date((concat(new.toTime, ' ', new.toDate)), '%H:%i %m/%d/%y') then
+		signal sqlstate '02000' SET MESSAGE_TEXT = 'Improper datetimes chosen';
+  end if;
+end; $$
+
+delimiter ;
+
 LOAD DATA LOCAL INFILE '*****MYPATH/BookData.csv' 
 INTO TABLE Book 
 FIELDS TERMINATED BY ',' 
