@@ -72,7 +72,9 @@ function addRental(request, response) {
 	  var toDate 	= formatVariableForSQL(request.body.fromDate);
 
 	  var insertTimePeriodQuery = 'INSERT INTO TimePeriod value(' + fromTime + ', ' +
-    	toTime + ', ' + fromDate + ', date_format(date_add(str_to_date(' + toDate + ',\'%m/%d/%Y\' ), INTERVAL 14 DAY),\'%m/%d/%Y\'));';
+    	toTime + ', ' + fromDate + ', date_format(date_add(str_to_date(' + toDate + ',\'%m/%d/%y\' ), INTERVAL 14 DAY),\'%m/%d/%y\'));';
+
+	  console.log(insertTimePeriodQuery);
 
     	var timeperiodIsDuplicate = 0;
 
@@ -93,7 +95,7 @@ function addRental(request, response) {
 
 	  var sqlrental ='insert into rental (status,bookid,accountID,fromTime,toTime,fromDate,toDate,returnTime,returnDate)\
 	   values (0,' + bookid + ',' + accountid + ',' + fromTime + ',' + toTime + ',' + 
-	   fromDate + ', date_format(date_add(str_to_date(' + toDate + ',\'%m/%d/%Y\' ), INTERVAL 14 DAY),\'%m/%d/%Y\')\
+	   fromDate + ', date_format(date_add(str_to_date(' + toDate + ',\'%m/%d/%y\' ), INTERVAL 14 DAY),\'%m/%d/%y\')\
 	   ,null,null);' 
 
 	   console.log(sqlrental);

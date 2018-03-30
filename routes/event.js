@@ -29,7 +29,7 @@ const duplicateSQLCode = 1062;
 
 
 function getEvents(request, response) {
-        connection.query('SELECT * FROM event ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%Y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
+        connection.query('SELECT * FROM event ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
                 response.status(422);
@@ -45,8 +45,8 @@ function getEvents(request, response) {
 
 function getEventsCurrent(request, response) {
 
-        connection.query('SELECT * FROM event WHERE CURDATE() <= STR_TO_DATE(toDate, \'%m/%d/%Y\') ' +
-            'ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%Y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
+        connection.query('SELECT * FROM event WHERE CURDATE() <= STR_TO_DATE(toDate, \'%m/%d/%y\') ' +
+            'ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
                 response.status(422);
@@ -61,8 +61,8 @@ function getEventsCurrent(request, response) {
 }
 
 function getEventsPast(request, response) {
-        connection.query('SELECT * FROM event WHERE CURDATE() > STR_TO_DATE(toDate, \'%m/%d/%Y\') ' +
-            'ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%Y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
+        connection.query('SELECT * FROM event WHERE CURDATE() > STR_TO_DATE(toDate, \'%m/%d/%y\') ' +
+            'ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
                 response.status(422);
@@ -81,7 +81,7 @@ function getEventId(request, response) {
         var eventid = request.params.id;
 
         connection.query('SELECT * FROM event WHERE eventid=' + eventid +
-            ' ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%Y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
+            ' ORDER BY STR_TO_DATE(fromDate, \'%m/%d/%y\'), STR_TO_DATE(fromTime, \'%H:%i\');', function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query\n');
                 response.status(422);
@@ -100,7 +100,7 @@ function getEventLocations(request, response) {
 
     var query = "SELECT event.name as eventName, librarybranch.name as branchName, address, phoneNum, fromTime, toTime, fromDate, toDate " +
         "FROM event INNER JOIN librarybranch ON event.branchNum = librarybranch.branchNum " +
-        "ORDER BY STR_TO_DATE(fromDate, '%m/%d/%Y'), STR_TO_DATE(fromTime, '%H:%i');"
+        "ORDER BY STR_TO_DATE(fromDate, '%m/%d/%y'), STR_TO_DATE(fromTime, '%H:%i');"
 
     connection.query(query, function(error, rows, fields){
         if(!!error) {
@@ -122,7 +122,7 @@ function getEventByLocation(request, response) {
 
         var query = "SELECT event.name as eventName, librarybranch.name as branchName, address, phoneNum, fromTime, toTime, fromDate, toDate " +
             "FROM event INNER JOIN librarybranch ON event.branchNum = librarybranch.branchNum " +
-            "WHERE librarybranch.name=" + location +  " ORDER BY STR_TO_DATE(fromDate, '%m/%d/%Y'), STR_TO_DATE(fromTime, '%H:%i');"
+            "WHERE librarybranch.name=" + location +  " ORDER BY STR_TO_DATE(fromDate, '%m/%d/%y'), STR_TO_DATE(fromTime, '%H:%i');"
 
         connection.query(query, function(error, rows, fields){
             if(!!error) {
