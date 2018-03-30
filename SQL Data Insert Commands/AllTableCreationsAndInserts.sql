@@ -146,24 +146,6 @@ CREATE TABLE Room (
 	 ON UPDATE CASCADE);
 
 
-CREATE TABLE EmployeeWorkedFor 
-	(eID			int,
-	 branchNum		int,
-	 fromDate 		varchar(100),
-	 toDate			varchar(100),
-	 fromTime		varchar(100),
-	 toTime			varchar(100),
- PRIMARY KEY (eID, branchNum, fromDate, toDate, fromTime, toTime),
- FOREIGN KEY (eID) REFERENCES Employee(eID)
- ON DELETE CASCADE
- ON UPDATE CASCADE,
- FOREIGN KEY (branchNum) REFERENCES Librarybranch(branchNum)
- ON DELETE NO ACTION
- ON UPDATE CASCADE,
-FOREIGN KEY (fromTime, toTime, fromDate, toDate)
-REFERENCES TimePeriod (fromTime, toTime, fromDate, toDate)
-);
-
 CREATE TABLE Schedules(
 				accountID int,
 				roomName varchar(100),
@@ -188,8 +170,8 @@ for each row
 begin
   if exists (select * from schedules
 			 where roomName=new.roomName
-             and str_to_date(concat(fromTime, ' ', fromDate), '%H:%i %m/%d/%Y') <= str_to_date((concat(new.toTime, ' ', new.toDate)), '%H:%i %m/%d/%Y')
-             and   str_to_date(concat(toTime, ' ', toDate), '%H:%i %m/%d/%Y')     >= str_to_date((concat(new.fromTime, ' ', new.fromDate)), '%H:%i %m/%d/%Y')) then
+             and str_to_date(concat(fromTime, ' ', fromDate), '%H:%i %m/%d/%y') <= str_to_date((concat(new.toTime, ' ', new.toDate)), '%H:%i %m/%d/%y')
+             and   str_to_date(concat(toTime, ' ', toDate), '%H:%i %m/%d/%y')     >= str_to_date((concat(new.fromTime, ' ', new.fromDate)), '%H:%i %m/%d/%y')) then
 		signal sqlstate '45000' SET MESSAGE_TEXT = 'Overlaps with existing data';
   end if;
 end; //
@@ -221,7 +203,7 @@ BEGIN
 			leave addfines;
         end if;
         
-		set dayslate = Datediff (current_date(), STR_TO_DATE(rentaltodate, '%m/%d/%Y'));   
+		set dayslate = Datediff (current_date(), STR_TO_DATE(rentaltodate, '%m/%d/%y'));   
         
         if dayslate > 0 then
 			set totalfines = totalfines + 1;
@@ -279,7 +261,7 @@ create trigger correct_times before insert on timeperiod
 for each row
 begin
   if str_to_date((concat(new.fromTime, ' ', new.fromDate)), '%H:%i %m/%d/%y') >= str_to_date((concat(new.toTime, ' ', new.toDate)), '%H:%i %m/%d/%y') then
-		signal sqlstate '02000' SET MESSAGE_TEXT = 'Improper datetimes chosen';
+		signal sqlstate '45000' SET MESSAGE_TEXT = 'Improper datetimes chosen';
   end if;
 end; $$
 
@@ -343,13 +325,6 @@ IGNORE 1 ROWS;
 
 LOAD DATA LOCAL INFILE '*****MYPATH/RoomData.csv' 
 INTO TABLE room 
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"'
-LINES TERMINATED BY '\r\n'
-IGNORE 1 ROWS;
-
-LOAD DATA LOCAL INFILE '*****MYPATH/EmployeeWorkedForData.csv' 
-INTO TABLE employeeworkedfor
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
