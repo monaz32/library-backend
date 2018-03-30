@@ -69,49 +69,17 @@ function addEmployee(request, response) {
         var query = 'INSERT INTO employee(eEmail,SIN,ename,eAddress,ePhoneNumber,branchNum, adminStatus, password) '+ 'VALUES' +'(' + '\'' + email + '\',' + '\'' + sin + '\',' +
             '\'' + name + '\',' + '\'' + address + '\',' + '\'' + phoneNum + '\',' + branch + ',' + admin + ',' + password + ');'
 
+            console.log(query);
+
         connection.query(query, function(error, rows, fields){
             if(!!error) {
                 console.log('Error in the query insert employee\n');
                 response.status(422);
                 response.send('422 Unprocessable Entity');
                 return;
-            }
-
+            }            
             console.log('Successfully added employee!\n');
-            var query2 = 'INSERT INTO timeperiod(fromTime, toTime, fromDate, toDate) ' +
-                'VALUES(\'0:00\', \'present\', DATE_FORMAT(curdate(), \'%m/%d/%y\'), \'present\');'
-
-            connection.query(query2, function(error, rows, fields){
-                if(!!error) {
-                    if (error.errno != duplicateSQLCode) {
-                        console.log('Error in the query time period\n');
-                        response.status(422);
-                        response.send('422 Unprocessable Entity');
-                        return;
-                    }
-                    else {console.log("Time period already exists")}
-                } else {
-                    console.log('Successfully added timeperiod!\n');
-
-                }
-                var query3 = 'INSERT INTO employeeworkedfor(eid, branchNum, fromDate, toDate, fromTime, toTime) ' +
-                    'VALUES(' + eid + ',' + '\'' + branch + '\'' + ', DATE_FORMAT(curdate(), \'%m/%d/%y\'), \'present\',\'0:00\', \'present\');'
-
-
-                connection.query(query3, function(error, rows, fields){
-                    if(!!error) {
-                        console.log('Error in the query add employee worked for\n');
-                        response.status(422);
-                        response.send('422 Unprocessable Entity');
-                        return;
-                    }
-                    else{
-                        response.send(rows);
-                    }    
-                });
-
-            });
-
+            response.send(rows);
         });
 
     });
