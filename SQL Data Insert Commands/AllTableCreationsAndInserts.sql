@@ -36,6 +36,7 @@ CREATE TABLE Members(
 	email 			varchar(100) NOT NULL,
 	name			varchar(100),
 	fines			Double ,
+	/*CHECK (FINES>=0) */ 
     password		varchar(100),
 	UNIQUE(email),
 	PRIMARY KEY(accountID)
