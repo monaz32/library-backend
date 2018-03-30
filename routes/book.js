@@ -62,6 +62,7 @@ function getBooks(request, response) {
             console.log('Error in the query\n');
             response.status(422);
             response.send('422 Unprocessable Entity');
+            return;
         }
 
         console.log('query SUCCESS!\n')
@@ -106,6 +107,7 @@ function addBook(request, response) {
 
                     response.status(422);
                     response.send('422 Unprocessable Entity');
+                    return;
                 }
 
                 console.log('query SUCCESS!\n')
@@ -131,6 +133,7 @@ function updateBook(request, response) {
 
             response.status(422);
             response.send('422 Unprocessable Entity');
+            return;
         }
 
         console.log('query SUCCESS!\n')
@@ -149,6 +152,7 @@ function getBook(request, response) {
 
             response.status(422);
             response.send('422 Unprocessable Entity');
+            return;
         }
 
         console.log('query SUCCESS!\n')
@@ -167,6 +171,7 @@ function deleteBook(request, response) {
 
             response.status(422);
             response.send('422 Unprocessable Entity');
+            return;
         }
 
         console.log('query SUCCESS!\n')
@@ -184,6 +189,7 @@ function getBookGenreCount(request, response) {
 
             response.status(422);
             response.send('422 Unprocessable Entity');
+            return;
         }
 
         console.log('query SUCCESS!\n')
